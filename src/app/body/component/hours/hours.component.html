@@ -1,0 +1,22 @@
+<div *ngIf="heureSelectionnee!" class="row">
+    Heure sélectionnée : {{heureSelectionnee}}
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <ngb-datepicker
+            [markDisabled]="isDisabled"
+            [(ngModel)]="dateSelectionnee"
+            (dateSelect)="genererHeuresDisponibles()"
+            [displayMonths]=2 >
+        </ngb-datepicker>
+    </div>
+    <div class="col-md-4">
+        <h3>Heures disponibles</h3>
+        <p *ngIf="availableHours.length === 0">Aucune heure disponible pour le moment.</p>
+        <ul *ngIf="availableHours.length > 0" >
+            <li *ngFor="let heure of availableHours" (click)="selectionnerHeure(heure)">
+            {{ heure }}
+            </li>
+        </ul>
+    </div>
+</div>

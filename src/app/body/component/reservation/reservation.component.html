@@ -1,0 +1,13 @@
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Réserver</h1>
+      <h2 class="mt-5 mb-3">Services :</h2>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let service of services">{{service.nom}} ({{service.prix}} € - {{service.duree}} min)</li>
+      </ul>
+    </div>
+      <app-hours></app-hours>
+  </div>
+</div>
