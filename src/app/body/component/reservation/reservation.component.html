@@ -1,13 +1,38 @@
 
 <div class="container my-5">
   <div class="row">
-    <div class="col-md-12">
-      <h1>Réserver</h1>
+    <h1>Réservation</h1>
+    <div class="col-md-12" *ngIf="services.length>0" >
       <h2 class="mt-5 mb-3">Services :</h2>
       <ul class="list-group">
         <li class="list-group-item" *ngFor="let service of services">{{service.nom}} ({{service.prix}} € - {{service.duree}} min)</li>
       </ul>
     </div>
-      <app-hours></app-hours>
+      <app-hours *ngIf="!reservation.services"></app-hours>
+      <div *ngIf="reservation.services">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Date de réservation</th>
+              <th>Service</th>
+              <th>Durée</th>
+              <th>Esthéticienne</th>
+              <th>Commentaire</th> <!-- Nouvelle colonne pour le commentaire -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ reservation.dateReservation | date:'short' }}</td>
+              <td *ngFor="let service of reservation.services">{{ service.nom }}</td>
+              <td>{{ duree }}</td>
+              <td>{{ reservation.estheticienne.nom }}</td>
+              <td>
+                <textarea class="form-control" [(ngModel)]="reservation.remarquesSpeciales"></textarea>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-primary" (click)="PayerSurPlace()">Payer sur place</button>
+      </div>
   </div>
 </div>

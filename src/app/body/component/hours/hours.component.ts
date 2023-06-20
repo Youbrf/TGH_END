@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
-import { RendezVous, Service } from 'src/app/models/model';
+import { Client, Estheticienne, Reservation, Service } from 'src/app/models/model';
 
 @Component({
   selector: 'app-hours',
@@ -11,16 +11,32 @@ import { RendezVous, Service } from 'src/app/models/model';
 })
 export class HoursComponent implements OnInit {
   dateSelectionnee!: NgbDateStruct;
-  heuresDisponibles: string[] = [];
-  reservation:RendezVous[]=[];
+  reservation:Reservation[]=[];
   isDisabled!:any;
-  reserv: { heureDebut: string, heureFin: string }[] = [];
   availableHours: string[] = [];
   heureSelectionnee!: string;
   services!: Service[];
   interval:number=0;
+  newreservation: Reservation={
+    id: 0,
+    dateReservation: new Date(),
+    heureDebut: '',
+    heureFin: '',
+    remarquesSpeciales: '',
+    statutReservation: '',
+    montantTotal: 0,
+    modePaiement: '',
+    dateCreation: '',
+    dateModification: '',
+    dateAnnulation: '',
+    etatPaiement: '',
+    client: new Client(),
+    estheticienne: new Estheticienne(),
+    services: []
+  };
+  serviceDurationA!: number;
 
-  constructor(private route: ActivatedRoute,private rv : ReservationService, private calendar: NgbCalendar) {
+  constructor(private router: Router,private route: ActivatedRoute,private rv : ReservationService, private calendar: NgbCalendar) {
     this.dateSelectionnee = this.calendar.getToday();
   }
 
@@ -34,11 +50,9 @@ export class HoursComponent implements OnInit {
   }
 
   genererHeuresDisponibles() {
-    this.rv.searchRendezVous(this.dateSelectionnee).subscribe({
+    this.rv.searchReservation(this.dateSelectionnee).subscribe({
       next: data => {
         this.reservation = data;
-        console.log(this.reservation);
-  
         const openingTime = new Date().setHours(9, 0, 0);
         const closingTime = new Date().setHours(18, 0, 0);
         const closingTimeDate = new Date(closingTime);
@@ -82,14 +96,29 @@ export class HoursComponent implements OnInit {
   }
   
   calculateServiceDuration() {
-    console.log(this.services);
     this.interval=0;
     this.services.forEach(e => {
       this.interval += e.duree;
     });
-    console.log(this.interval);
     return this.interval;
   }
-  
-  
+
+  redirigerVersFormulaire(){
+    let [h,m] = this.heureSelectionnee.split(":");
+    const hours = parseInt(h);
+    const minutes = parseInt(m);
+    this.newreservation.dateReservation = new Date(this.dateSelectionnee.year,this.dateSelectionnee.month-1,this.dateSelectionnee.day,hours,minutes);
+    this.newreservation.heureDebut = this.heureSelectionnee;
+    function ajouterMinutesAHeure(heure: string, minutes: number): string {
+      const [heures, minutesActuelles] = heure.split(":");
+      const heuresActuelles = parseInt(heures);
+      const minutesTotales = heuresActuelles * 60 + parseInt(minutesActuelles) + minutes;
+      const nouvellesHeures = Math.floor(minutesTotales / 60) % 24;
+      const nouvellesMinutes = minutesTotales % 60;
+      return `${nouvellesHeures.toString().padStart(2, '0')}:${nouvellesMinutes.toString().padStart(2, '0')}`;
+    }
+    this.newreservation.heureFin = ajouterMinutesAHeure(this.newreservation.heureDebut,this.calculateServiceDuration())
+    this.newreservation.services = this.services;
+    this.router.navigate(['/reservation'], { queryParams: { reservation: JSON.stringify(this.newreservation), reload:true}});
+  }
 }

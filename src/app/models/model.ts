@@ -1,22 +1,34 @@
 import { Injectable } from '@angular/core';
+import { EmailValidator } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RendezVous {
+export class Reservation {  
   id!: number;
   dateReservation!: Date;
   heureDebut!: string;
   heureFin!: string;
-  client!: Client;
-  estheticienne!: Estheticienne;
-  service!: Service;
+  remarquesSpeciales!: string;
+  statutReservation!: string;
+  montantTotal!: number;
+  modePaiement!: string;
+  dateCreation!: string;
+  dateModification!: string;
+  dateAnnulation!: string;
+  etatPaiement!: string;
+  client!: Client; 
+  estheticienne!: Estheticienne; 
+  services!: Service[];
 }
+
 
 export class Client {
   id!: number;
   nom!: string;
   prenom!: string;
+  email!: EmailValidator;
+  gsm!:number;
 }
 
 export class Estheticienne {
@@ -31,12 +43,13 @@ export class Service {
   description!: string;
   duree!: number;
   prix!: number;
+  categorie!: CategorieService;
 }
 
-
-export class Categorie {
+export class CategorieService {
+  id!: number;
   nom!: string;
   description!: string;
-  id!: number;
 }
+
 
