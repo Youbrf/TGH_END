@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="registrationForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+        <h2 class="text-center">Inscription</h2>
+
+        <div class="form-group">
+          <label for="firstname">Prénom</label>
+          <input type="text" id="firstname" class="form-control" formControlName="firstname" required>
+          <div *ngIf="registrationForm.get('firstname')?.invalid && (registrationForm.get('firstname')?.dirty || registrationForm.get('firstname')?.touched)" class="invalid-feedback">
+            Prénom est requis.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lastname">Nom</label>
+          <input type="text" id="lastname" class="form-control" formControlName="lastname" required>
+          <div *ngIf="registrationForm.get('lastname')?.invalid && (registrationForm.get('lastname')?.dirty || registrationForm.get('lastname')?.touched)" class="invalid-feedback">
+            Nom est requis.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-control" formControlName="email" required>
+          <div *ngIf="registrationForm.get('email')?.invalid && (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)" class="invalid-feedback">
+            Email est requis.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" class="form-control" formControlName="password" required>
+          <div *ngIf="registrationForm.get('password')?.invalid && (registrationForm.get('password')?.dirty || registrationForm.get('password')?.touched)" class="invalid-feedback">
+            Mot de passe est requis.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirmer le mot de passe</label>
+          <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword" required>
+          <div *ngIf="registrationForm.hasError('passwordMismatch') && (registrationForm.get('confirmPassword')?.dirty || registrationForm.get('confirmPassword')?.touched)" class="invalid-feedback">
+            Les mots de passe ne correspondent pas.
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" [disabled]="registrationForm.invalid">S'inscrire</button>
+      </form>
+    </div>
+  </div>
+</div>
