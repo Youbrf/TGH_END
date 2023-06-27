@@ -51,5 +51,14 @@ export class CategorieService {
   nom!: string;
   description!: string;
 }
-
-
+export class Register {
+  firstname!: string;
+  lastname!: string;
+  email!: string;
+  password!: string;
+  role!: string;
+}
+export class Signin{
+  email!: string;
+  password!: string;
+}

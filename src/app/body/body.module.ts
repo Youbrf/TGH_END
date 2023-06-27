@@ -9,6 +9,9 @@ import { AppRoutingModule } from '../app-routing.module';
 import { HomeComponent } from './component/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HoursComponent } from './component/hours/hours.component';
+import { AuthentificationComponent } from './component/authentification/authentification.component';
+import { RegisterComponent } from './component/register/register.component';
+import { SigninComponent } from './component/signin/signin.component';
 
 
 
@@ -17,7 +20,10 @@ import { HoursComponent } from './component/hours/hours.component';
     ServiceListComponent,
     ReservationComponent,
     HomeComponent,
-    HoursComponent
+    HoursComponent,
+    AuthentificationComponent,
+    RegisterComponent,
+    SigninComponent
   ],
   imports: [
     AppRoutingModule,

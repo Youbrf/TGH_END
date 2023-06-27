@@ -1,0 +1,10 @@
+<div>
+    <div *ngIf="showRegister">
+      <app-register></app-register>
+      <button (click)="toggleView()">Passer à la connexion</button>
+    </div>
+    <div *ngIf="!showRegister">
+      <app-signin></app-signin>
+      <button (click)="toggleView()">Passer à l'inscription</button>
+    </div>
+  </div>
