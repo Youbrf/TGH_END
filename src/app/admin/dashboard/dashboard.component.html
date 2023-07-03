@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar vh-100 overflow-y-auto">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/admin/dashboard">
+              <i class="fas fa-tachometer-alt"></i> Tableau de bord
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/users">
+              <i class="fas fa-users"></i> Clients
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/employers">
+              <i class="fas fa-users"></i> Employés
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/services">
+              <i class="fas fa-cogs"></i> Services
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/reservations">
+              <i class="fas fa-calendar-alt"></i> Réservations
+            </a>
+          </li>
+          <li class="nav-item" >
+            <a class="nav-link" href="home" (click)="logout()">Déconnection</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

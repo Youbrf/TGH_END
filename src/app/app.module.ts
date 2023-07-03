@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BodyModule } from './body/body.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { BodyModule } from './body/body.module';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    BodyModule
+    BodyModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

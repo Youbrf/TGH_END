@@ -1,0 +1,57 @@
+<div class="container">
+    <h1>Réservations</h1>
+
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="searchQuery" (ngModelChange)="searchReservations()" placeholder="Rechercher...">
+    </div>
+  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date de réservation</th>
+          <th>début</th>
+          <th>fin</th>
+          <th>Remarques</th>
+          <th>Statut</th>
+          <th>Montant</th>
+          <th>Mode de paiement</th>
+          <th>État de paiement</th>
+          <th>Utilisateur</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{ reservation.dateReservation }}</td>
+          <td>{{ reservation.heureDebut }}</td>
+          <td>{{ reservation.heureFin }}</td>
+          <td>{{ reservation.remarquesSpeciales }}</td>
+          <td>{{ reservation.statutReservation }}</td>
+          <td>{{ reservation.montantTotal }}</td>
+          <td>{{ reservation.modePaiement }}</td>
+          <td>{{ reservation.etatPaiement }}</td>
+          <td>{{ reservation.user.firstname }}</td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="deleteReservation(reservation.id)">Supprimer</button>
+            <button class="btn btn-sm btn-primary" (click)="updateReservation(editReservationModal)">Modifier</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #editReservationModal>
+      <div class="modal-header">
+        <h4 class="modal-title">Modifier la réservation</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Ajoutez ici les champs et les formulaires pour modifier la réservation -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Fermer</button>
+        <button type="button" class="btn btn-primary">Enregistrer</button>
+      </div>
+    </ng-template>
+  </div>
+  

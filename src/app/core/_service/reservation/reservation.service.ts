@@ -18,7 +18,9 @@ export class ReservationService {
 
   constructor(private HTTP: HttpClient, private router:Router) { }
 
-  
+  getAllReservation(){
+    return this.HTTP.get<Reservation[]>(API_URL+'RendezVous');
+  }
 
   searchReservation(date: NgbDateStruct): Observable<Reservation[]> {
     const params = new HttpParams().set('date', `${date.year}-${sprintf('%02d', date.month)}-${sprintf('%02d', date.day)}`);
@@ -35,6 +37,22 @@ export class ReservationService {
         console.error('Erreur lors de l\'enregistrement de la réservation :', error);
       }
     );
+  }
+
+  deleteReservation(id : number){
+    this.HTTP.delete(API_URL+"RendezVous/"+id).subscribe(
+      () => {
+        alert('RendezVous supprimé avec succès');
+        window.location.reload();
+      },
+      error => {
+        console.error('Erreur lors de la suppression du RendezVous', error);
+      }
+    );
+  }
+
+  updateRendezVous(id: number, reservation: Reservation) {
+    this.HTTP.put<Reservation>(API_URL+id, reservation);
   }
   
 }

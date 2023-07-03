@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>Liste des clients</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.firstname }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button class="btn btn-primary" [routerLink]="[user.id]">Détails</button>
+          <button class="btn btn-success" [routerLink]="[user.id,'edit']" style="margin-left: 5px;">Modifier</button>
+          <button class="btn btn-danger" (click)="deleteUser(user)" style="margin-left: 5px;">Supprimer</button>
+          <button class="btn btn-info"  (click)="viewReservationHistory(user)" style="margin-left: 5px;">Historique des réservations</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-right">
+    <button class="btn btn-success btn-sm" [routerLink]="['create']">Ajouter un client</button>
+  </div>
+</div>

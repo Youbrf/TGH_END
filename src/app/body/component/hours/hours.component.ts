@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { AuthentificationService } from 'src/app/core/_service/authentification/authentification.service';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
-import { Client, Estheticienne, Reservation, Service } from 'src/app/models/model';
+import { UserService } from 'src/app/core/_service/user/user.service';
+import { Reservation, Service, User } from 'src/app/models/model';
 
 @Component({
   selector: 'app-hours',
@@ -17,6 +19,8 @@ export class HoursComponent implements OnInit {
   heureSelectionnee!: string;
   services!: Service[];
   interval:number=0;
+  employeSelectionne!: number; 
+  employes: User[] = [];
   newreservation: Reservation={
     id: 0,
     dateReservation: new Date(),
@@ -30,19 +34,26 @@ export class HoursComponent implements OnInit {
     dateModification: '',
     dateAnnulation: '',
     etatPaiement: '',
-    client: new Client(),
-    estheticienne: new Estheticienne(),
+    user: new User(),
+    employer: new User(),
     services: []
   };
   serviceDurationA!: number;
 
-  constructor(private router: Router,private route: ActivatedRoute,private rv : ReservationService, private calendar: NgbCalendar) {
+  constructor(private auth: AuthentificationService,private router: Router,private userS: UserService,private route: ActivatedRoute,private rv : ReservationService, private calendar: NgbCalendar) {
     this.dateSelectionnee = this.calendar.getToday();
   }
 
   ngOnInit(): void {
     this.services = JSON.parse(this.route.snapshot.queryParamMap.get('services') ?? '[]');
     this.isDisabled = (date: NgbDate) => this.calendar.getWeekday(date) >= 7 || this.calendar.getWeekday(date) == 1;
+    this.userS.getAllUsers().subscribe(users => {
+      for (const user of users) {
+        if (user.role === "EMPLOYEE") {
+          this.employes.push(user);
+        }
+      }
+    });
     this.genererHeuresDisponibles();
   }
   selectionnerHeure(heure: string) {
@@ -119,6 +130,21 @@ export class HoursComponent implements OnInit {
     }
     this.newreservation.heureFin = ajouterMinutesAHeure(this.newreservation.heureDebut,this.calculateServiceDuration())
     this.newreservation.services = this.services;
-    this.router.navigate(['/reservation'], { queryParams: { reservation: JSON.stringify(this.newreservation), reload:true}});
+    for (const service of this.services) {
+      this.newreservation.montantTotal += service.prix;
+    }
+
+    this.userS.getAllUsers().subscribe(users => {
+      for (const user of users) {
+        if (user.id == this.employeSelectionne) {
+          this.newreservation.employer=user;
+        }
+        if (user.email === this.auth.getUsername()) {
+          this.newreservation.user = user;
+        }
+      }
+      this.router.navigate(['/reservation'], { queryParams: { reservation: JSON.stringify(this.newreservation), reload:true}});
+    });
+    
   }
 }

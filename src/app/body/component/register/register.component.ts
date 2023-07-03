@@ -52,9 +52,7 @@ export class RegisterComponent implements OnInit {
     this.information.email = this.registrationForm.get('email')?.value;
     this.information.password = this.registrationForm.get('password')?.value;
     this.information.role = "USER";
-    console.log(this.information);
     this.auth.register(this.information);
-    console.log('je suis la ');
     
   }
 

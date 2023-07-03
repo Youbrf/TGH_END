@@ -17,24 +17,9 @@ export class Reservation {
   dateModification!: string;
   dateAnnulation!: string;
   etatPaiement!: string;
-  client!: Client; 
-  estheticienne!: Estheticienne; 
+  user!: User; 
+  employer!: User; 
   services!: Service[];
-}
-
-
-export class Client {
-  id!: number;
-  nom!: string;
-  prenom!: string;
-  email!: EmailValidator;
-  gsm!:number;
-}
-
-export class Estheticienne {
-  id!: number;
-  nom!: string;
-  prenom!: string;
 }
 
 export class Service {
@@ -61,4 +46,12 @@ export class Register {
 export class Signin{
   email!: string;
   password!: string;
+}
+export class User {
+  id!: number;
+  email!: string;
+  firstname!: string;
+  lastname!: string;
+  password!: string;
+  role!: string;
 }
