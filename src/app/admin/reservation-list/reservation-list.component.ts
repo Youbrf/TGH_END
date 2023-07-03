@@ -35,9 +35,6 @@ export class ReservationListComponent {
     this.reservation.deleteReservation(id);
   }
 
-  updateReservation(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-    console.log(this.modalRef);
-    
+  updateReservation() {
   }
 }

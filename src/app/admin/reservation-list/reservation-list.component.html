@@ -33,25 +33,10 @@
           <td>{{ reservation.user.firstname }}</td>
           <td>
             <button class="btn btn-sm btn-danger" (click)="deleteReservation(reservation.id)">Supprimer</button>
-            <button class="btn btn-sm btn-primary" (click)="updateReservation(editReservationModal)">Modifier</button>
+            <button class="btn btn-sm btn-primary" (click)="updateReservation()">Modifier</button>
           </td>
         </tr>
       </tbody>
     </table>
-    <ng-template #editReservationModal>
-      <div class="modal-header">
-        <h4 class="modal-title">Modifier la réservation</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- Ajoutez ici les champs et les formulaires pour modifier la réservation -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Fermer</button>
-        <button type="button" class="btn btn-primary">Enregistrer</button>
-      </div>
-    </ng-template>
   </div>
   
