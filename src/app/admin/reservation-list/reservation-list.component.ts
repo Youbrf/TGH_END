@@ -1,7 +1,6 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component} from '@angular/core';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
 import { Reservation } from 'src/app/models/model';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-reservation-list',
@@ -11,9 +10,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class ReservationListComponent {
   reservations!: Reservation[]; 
   searchQuery!: string;
-  modalRef!: BsModalRef;
 
-  constructor(private reservation: ReservationService, private modalService: BsModalService) { }
+  constructor(private reservation: ReservationService) { }
 
   ngOnInit() {
     this.loadReservations();
