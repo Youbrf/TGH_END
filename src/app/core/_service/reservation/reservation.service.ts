@@ -42,17 +42,25 @@ export class ReservationService {
   deleteReservation(id : number){
     this.HTTP.delete(API_URL+"RendezVous/"+id).subscribe(
       () => {
-        alert('RendezVous supprimé avec succès');
+        alert('Réservation supprimé avec succès');
         window.location.reload();
       },
       error => {
-        console.error('Erreur lors de la suppression du RendezVous', error);
+        console.error('Erreur lors de la suppression de la réservation', error);
       }
     );
   }
 
   updateRendezVous(id: number, reservation: Reservation) {
-    this.HTTP.put<Reservation>(API_URL+id, reservation);
+    this.HTTP.put<Reservation>(API_URL+"RendezVous/"+id, reservation).subscribe(
+      () => {
+        alert('Réservation mis à jour avec succès');
+        window.location.reload();
+      },
+      error => {
+        console.error('Erreur lors de la mis à jour de la réservation', error);
+      }
+    );
   }
   
 }

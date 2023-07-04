@@ -20,6 +20,7 @@ import { EmployerListComponent } from './employer-list/employer-list.component';
 import { EmployerCreateComponent } from './employer-create/employer-create.component';
 import { EmployerDetailsComponent } from './employer-details/employer-details.component';
 import { MainComponent } from './main/main.component';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { MainComponent } from './main/main.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbDatepickerModule,
     AdminRoutingModule
   ],
   exports:[
