@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { ModalDismissReasons, NgbDateParserFormatter, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
+import { UserService } from 'src/app/core/_service/user/user.service';
 import { Reservation, User } from 'src/app/models/model';
 
 @Component({
@@ -14,16 +15,32 @@ export class ReservationListComponent {
   searchQuery!: string;
   closeResult = '';
   reservationToUpdate: Reservation = new Reservation();
+  employers: User[] = [];
+  users: User[] = [];
 
-  constructor(private reservationService: ReservationService,private modalService: NgbModal,private parserFormatter: NgbDateParserFormatter) { }
+  constructor(private userService: UserService,private reservationService: ReservationService,private modalService: NgbModal,private parserFormatter: NgbDateParserFormatter) { }
 
   ngOnInit() {
     this.loadReservations();
+    this.loadUserAndEmployer();
   }
 
   loadReservations() {
     this.reservationService.getAllReservation().subscribe(reservations => {
       this.reservations = reservations;
+    });
+  }
+
+  loadUserAndEmployer(){
+    this.userService.getAllUsers().subscribe(users =>{
+      for (const user of users) {
+        if (user.role === 'USER') {
+            this.users.push(user);
+        }
+        if (user.role === 'EMPLOYEE') {
+            this.employers.push(user);
+        }
+      }
     });
   }
 
@@ -59,16 +76,11 @@ export class ReservationListComponent {
   searchReservations() {
   }
 
-  sortReservations() {
-  }
-
   deleteReservation(id: number) { 
     this.reservationService.deleteReservation(id);
   }
 
   updateReservation() {
-    console.log(this.dateSelectionnee.day);
-    
     this.reservationToUpdate.dateReservation = new Date(this.dateSelectionnee.year,this.dateSelectionnee.month-1,this.dateSelectionnee.day+1);
     this.reservationService.updateRendezVous(this.reservationToUpdate.id,this.reservationToUpdate);
    console.log(this.reservationToUpdate);

@@ -4,7 +4,6 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { ReservationCreateComponent } from './reservation-create/reservation-create.component';
 import { ReservationDetailsComponent } from './reservation-details/reservation-details.component';
-import { ReservationEditComponent } from './reservation-edit/reservation-edit.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ServiceCreateComponent } from './service-create/service-create.component';
 import { ServiceDetailsComponent } from './service-details/service-details.component';
@@ -38,7 +37,6 @@ const routes: Routes = [
       { path: 'reservations', component: ReservationListComponent },
       { path: 'reservations/create', component: ReservationCreateComponent },
       { path: 'reservations/:id', component: ReservationDetailsComponent },
-      { path: 'reservations/:id/edit', component: ReservationEditComponent },
     ]
   }
   

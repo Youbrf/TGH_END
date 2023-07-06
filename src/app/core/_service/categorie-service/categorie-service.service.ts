@@ -13,11 +13,15 @@ export class CategorieServiceService {
   
 
   constructor(private HTTP: HttpClient) { }
-  
+  //controleur categorie
   getAllCategories(): Observable<CategorieService[]> {
     return this.HTTP.get<CategorieService[]>(API_URL+'CategorieServices');
   }
   getServicesByCategorie(idCategorie: number): Observable<Service[]> {
     return this.HTTP.get<Service[]>(API_URL+"Services/categorie/"+idCategorie);
+  }
+  // controleur service
+  getServiceById(idService: number): Observable<Service> {
+    return this.HTTP.get<Service>(API_URL+"Services/"+idService);
   }
 }

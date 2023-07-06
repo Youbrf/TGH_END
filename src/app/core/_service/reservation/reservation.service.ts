@@ -5,6 +5,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { sprintf } from 'sprintf-js';
 import { Reservation, Service } from 'src/app/models/model';
+import { AuthentificationService } from '../authentification/authentification.service';
 
 const API_URL = 'http://localhost:8080/api/';
 const httpOptions = {
@@ -16,7 +17,7 @@ const httpOptions = {
 })
 export class ReservationService {
 
-  constructor(private HTTP: HttpClient, private router:Router) { }
+  constructor(private HTTP: HttpClient, private router:Router,private auth : AuthentificationService) { }
 
   getAllReservation(){
     return this.HTTP.get<Reservation[]>(API_URL+'RendezVous');
@@ -31,7 +32,11 @@ export class ReservationService {
     this.HTTP.post<Reservation>(API_URL+"RendezVous",reservation, httpOptions).subscribe(
       () => {
         alert('La réservation a été enregistrée avec succès.');
-        this.router.navigate(['/home']);
+        if (this.auth.getRole() === 'ADMIN') {
+          this.router.navigate(['admin/reservations']);
+        } else {
+          this.router.navigate(['/home']);
+        }
       },
       (error) => {
         console.error('Erreur lors de l\'enregistrement de la réservation :', error);
