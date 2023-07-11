@@ -7,7 +7,6 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { ServiceListComponent } from './service-list/service-list.component';
 import { ServiceCreateComponent } from './service-create/service-create.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
-import { ReservationDetailsComponent } from './reservation-details/reservation-details.component';
 import { ReservationCreateComponent } from './reservation-create/reservation-create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -29,7 +28,6 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
     ServiceListComponent,
     ServiceCreateComponent,
     ReservationListComponent,
-    ReservationDetailsComponent,
     ReservationCreateComponent,
     DashboardComponent,
     EmployerEditComponent,

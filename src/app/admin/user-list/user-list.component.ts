@@ -23,8 +23,8 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  deleteUser(user: any) {
-    // Logique pour supprimer l'utilisateur
+  deleteUser(idUser: number) {
+    this.userService.deleteUser(idUser);
   }
 
   viewReservationHistory(user: any) {

@@ -24,5 +24,16 @@ export class UserService {
   updateUser(user: User) {
     return this.HTTP.put<User>(API_URL+"/"+user.id,user);
   }
+  deleteUser(idUser: number){
+    this.HTTP.delete(API_URL+'/'+idUser).subscribe(
+      () => {
+        alert('Client supprimé avec succès');
+        window.location.reload();
+      },
+      error => {
+        console.error('Erreur lors de la suppression du client', error);
+      }
+    );
+  }
 
 }

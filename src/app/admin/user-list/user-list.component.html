@@ -17,8 +17,8 @@
         <td>
           <button class="btn btn-primary" [routerLink]="[user.id]">Détails</button>
           <button class="btn btn-success" [routerLink]="[user.id,'edit']" style="margin-left: 5px;">Modifier</button>
-          <button class="btn btn-danger" (click)="deleteUser(user)" style="margin-left: 5px;">Supprimer</button>
-          <button class="btn btn-info"  (click)="viewReservationHistory(user)" style="margin-left: 5px;">Historique des réservations</button>
+          <button class="btn btn-danger" (click)="deleteUser(user.id)" style="margin-left: 5px;">Supprimer</button>
+          <button class="btn btn-info"  (click)="viewReservationHistory(user.id)" style="margin-left: 5px;">Historique des réservations</button>
         </td>
       </tr>
     </tbody>

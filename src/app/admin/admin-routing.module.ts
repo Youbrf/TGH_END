@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { ReservationCreateComponent } from './reservation-create/reservation-create.component';
-import { ReservationDetailsComponent } from './reservation-details/reservation-details.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ServiceCreateComponent } from './service-create/service-create.component';
 import { ServiceListComponent } from './service-list/service-list.component';
@@ -32,7 +31,6 @@ const routes: Routes = [
       { path: 'services/create', component: ServiceCreateComponent },
       { path: 'reservations', component: ReservationListComponent },
       { path: 'reservations/create', component: ReservationCreateComponent },
-      { path: 'reservations/:id', component: ReservationDetailsComponent },
     ]
   }
   
