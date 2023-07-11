@@ -6,8 +6,6 @@ import { ReservationCreateComponent } from './reservation-create/reservation-cre
 import { ReservationDetailsComponent } from './reservation-details/reservation-details.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ServiceCreateComponent } from './service-create/service-create.component';
-import { ServiceDetailsComponent } from './service-details/service-details.component';
-import { ServiceEditComponent } from './service-edit/service-edit.component';
 import { ServiceListComponent } from './service-list/service-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
@@ -32,8 +30,6 @@ const routes: Routes = [
       { path: 'employers/:id/edit', component: EmployerEditComponent},
       { path: 'services', component: ServiceListComponent },
       { path: 'services/create', component: ServiceCreateComponent },
-      { path: 'services/:id', component: ServiceDetailsComponent },
-      { path: 'services/:id/edit', component: ServiceEditComponent },
       { path: 'reservations', component: ReservationListComponent },
       { path: 'reservations/create', component: ReservationCreateComponent },
       { path: 'reservations/:id', component: ReservationDetailsComponent },

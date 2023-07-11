@@ -12,17 +12,97 @@
           <td>{{ categorie.nom }}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Actions">
-              <button class="btn btn-primary btn-sm" (click)="editCategorie(categorie)">Modifier</button>
-              <button class="btn btn-danger btn-sm" (click)="deleteCategorie(categorie)">Supprimer</button>
+              <button class="btn btn-primary btn-sm" (click)="open(content, categorie)">Modifier</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteCategorie(categorie.id)">Supprimer</button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="text-right">
-      <button class="btn btn-success btn-sm" (click)="addCategorie()">Ajouter une catégorie</button>
+      <button class="btn btn-success btn-sm" (click)="openNewCategorie(contentC)">Ajouter une catégorie</button>
     </div>
   </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Mise à jour catégorie</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="nom">Nom</label>
+          <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="categorieToUpdate.nom">
+        </div>
+        <div class="mb-3">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="description" name="description" [(ngModel)]="categorieToUpdate.description">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="updateCategorie()">Save</button>
+    </div>
+  </ng-template>
+
+  <ng-template #contentC let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Ajouter une catégorie</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="nom">Nom</label>
+          <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="newCategorie.nom">
+        </div>
+        <div class="mb-3">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="description" name="description" [(ngModel)]="newCategorie.description">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="addCategorie()">Ajouter</button>
+    </div>
+  </ng-template>
+  
+
+  <ng-template #contents let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Mise à jour service</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="nom">Nom</label>
+          <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="serviceToUpdate.nom">
+        </div>
+        <div class="mb-3">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="description" name="description" [(ngModel)]="serviceToUpdate.description">
+        </div>
+        <div class="mb-3">
+          <label for="duree">Durée</label>
+          <input type="text" class="form-control" id="duree" name="duree" [(ngModel)]="serviceToUpdate.duree">
+        </div>
+        <div class="mb-3">
+          <label for="prix">Prix</label>
+          <input type="text" class="form-control" id="prix" name="prix" [(ngModel)]="serviceToUpdate.prix">
+        </div>
+        <div class="mb-3">
+          <label for="categorie">Catégorie</label>
+          <input type="text" class="form-control" id="categorie" name="categorie" [(ngModel)]="serviceToUpdate.categorie.nom">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="updateService()">Save</button>
+    </div>
+  </ng-template>
+  
   
   <div class="container">
     <h2>Liste des services</h2>
@@ -46,15 +126,15 @@
           <td>{{ service.categorie.nom }}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Actions">
-              <button class="btn btn-primary btn-sm" (click)="editService(service)">Modifier</button>
-              <button class="btn btn-danger btn-sm" (click)="deleteService(service)">Supprimer</button>
+              <button class="btn btn-primary btn-sm" (click)="openService(contents,service)">Modifier</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteService(service.id)">Supprimer</button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="text-right">
-      <button class="btn btn-success btn-sm" (click)="addService()">Ajouter un service</button>
+      <button class="btn btn-success btn-sm" [routerLink]="['create']">Ajouter un service</button>
     </div>
   </div>
   

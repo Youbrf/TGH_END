@@ -23,8 +23,6 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  addUser(){}
-
   deleteUser(user: any) {
     // Logique pour supprimer l'utilisateur
   }
