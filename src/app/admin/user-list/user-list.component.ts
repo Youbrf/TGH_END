@@ -27,7 +27,4 @@ export class UserListComponent implements OnInit {
     this.userService.deleteUser(idUser);
   }
 
-  viewReservationHistory(user: any) {
-    // Logique pour afficher l'historique des réservations de l'utilisateur
-  }
 }

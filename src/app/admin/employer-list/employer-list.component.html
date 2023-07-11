@@ -5,26 +5,26 @@
         <tr>
           <th>Nom</th>
           <th>Email</th>
-          <th>Numéro de téléphone</th>
+          <th>Role</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let employer of employers">
-          <td>{{ employer.name }}</td>
+          <td>{{ employer.firstname }}</td>
           <td>{{ employer.email }}</td>
-          <td>{{ employer.phone }}</td>
+          <td>{{ employer.role }}</td>
           <td>
-            <button class="btn btn-primary" (click)="viewEmployerDetails(employer)">Détails</button>
-            <button class="btn btn-success" (click)="editEmployer(employer)" style="margin-left: 5px;">Modifier</button>
-            <button class="btn btn-danger" (click)="deleteEmployer(employer)" style="margin-left: 5px;">Supprimer</button>
-            <button class="btn btn-info" (click)="viewReservationHistory(employer)" style="margin-left: 5px;">Historique des réservations</button>
+            <button class="btn btn-primary" [routerLink]="[employer.id]">Détails</button>
+            <button class="btn btn-success" [routerLink]="[employer.id,'edit']" style="margin-left: 5px;">Modifier</button>
+            <button class="btn btn-danger" (click)="deleteEmployer(employer.id)" style="margin-left: 5px;">Supprimer</button>
+            <button class="btn btn-info" [routerLink]="[employer.id,'history']" style="margin-left: 5px;">Historique des réservations</button>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="text-right">
-      <button class="btn btn-success btn-sm" (click)="addEmployer()">Ajouter un employer</button>
+      <button class="btn btn-success btn-sm" [routerLink]="['create']">Ajouter un employer</button>
     </div>
   </div>
   

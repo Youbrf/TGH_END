@@ -11,10 +11,7 @@ import { ReservationCreateComponent } from './reservation-create/reservation-cre
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { EmployerEditComponent } from './employer-edit/employer-edit.component';
 import { EmployerListComponent } from './employer-list/employer-list.component';
-import { EmployerCreateComponent } from './employer-create/employer-create.component';
-import { EmployerDetailsComponent } from './employer-details/employer-details.component';
 import { MainComponent } from './main/main.component';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { HistoryReservationUserComponent } from './history-reservation-user/history-reservation-user.component';
@@ -31,10 +28,7 @@ import { HistoryReservationUserComponent } from './history-reservation-user/hist
     ReservationListComponent,
     ReservationCreateComponent,
     DashboardComponent,
-    EmployerEditComponent,
     EmployerListComponent,
-    EmployerCreateComponent,
-    EmployerDetailsComponent,
     MainComponent,
     HistoryReservationUserComponent
   ],

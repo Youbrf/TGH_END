@@ -9,9 +9,6 @@ import { ServiceListComponent } from './service-list/service-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { EmployerListComponent } from './employer-list/employer-list.component';
-import { EmployerCreateComponent } from './employer-create/employer-create.component';
-import { EmployerDetailsComponent } from './employer-details/employer-details.component';
-import { EmployerEditComponent } from './employer-edit/employer-edit.component';
 import { MainComponent } from './main/main.component';
 import { HistoryReservationUserComponent } from './history-reservation-user/history-reservation-user.component';
 
@@ -26,9 +23,10 @@ const routes: Routes = [
       { path: 'users/:id/edit', component: UserEditComponent },
       { path: 'users/:id/history', component: HistoryReservationUserComponent},
       { path: 'employers', component: EmployerListComponent},
-      { path: 'employers/create', component: EmployerCreateComponent},
-      { path: 'employers/:id', component: EmployerDetailsComponent},
-      { path: 'employers/:id/edit', component: EmployerEditComponent},
+      { path: 'employers/create', component: UserCreateComponent},
+      { path: 'employers/:id', component: UserDetailsComponent},
+      { path: 'employers/:id/edit', component: UserEditComponent},
+      { path: 'employers/:id/history', component: HistoryReservationUserComponent},
       { path: 'services', component: ServiceListComponent },
       { path: 'services/create', component: ServiceCreateComponent },
       { path: 'reservations', component: ReservationListComponent },
