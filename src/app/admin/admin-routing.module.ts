@@ -13,6 +13,7 @@ import { EmployerCreateComponent } from './employer-create/employer-create.compo
 import { EmployerDetailsComponent } from './employer-details/employer-details.component';
 import { EmployerEditComponent } from './employer-edit/employer-edit.component';
 import { MainComponent } from './main/main.component';
+import { HistoryReservationUserComponent } from './history-reservation-user/history-reservation-user.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'users/create', component: UserCreateComponent },
       { path: 'users/:id', component: UserDetailsComponent },
       { path: 'users/:id/edit', component: UserEditComponent },
+      { path: 'users/:id/history', component: HistoryReservationUserComponent},
       { path: 'employers', component: EmployerListComponent},
       { path: 'employers/create', component: EmployerCreateComponent},
       { path: 'employers/:id', component: EmployerDetailsComponent},
