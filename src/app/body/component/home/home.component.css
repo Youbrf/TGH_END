@@ -114,4 +114,39 @@ section {
     color: #fff; /* Couleur du texte du bouton au survol */
   }
   
+  /* GALLERY */
+  .gallery-section h2{
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 100px;
+    text-align: center;
+
+  }
+
+  .carousel-inner img {
+    max-height: 600px; /* Ajustez la hauteur maximale des images du carrousel selon vos besoins */
+    object-fit: cover;
+  }
+  
+  .carousel-indicators li {
+    background-color: #ffa500; /* Couleur des indicateurs du carrousel */
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: #ffa500; /* Couleur des icônes de navigation du carrousel */
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 30px; /* Ajustez la largeur des icônes de navigation du carrousel selon vos besoins */
+  }
+  
+  .carousel-control-prev {
+    left: -40px; /* Ajustez la position de l'icône de navigation précédente du carrousel */
+  }
+  
+  .carousel-control-next {
+    right: -40px; /* Ajustez la position de l'icône de navigation suivante du carrousel */
+  }
   
