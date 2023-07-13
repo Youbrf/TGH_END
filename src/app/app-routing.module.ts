@@ -4,12 +4,14 @@ import { HomeComponent } from './body/component/home/home.component';
 import { ReservationComponent } from './body/component/reservation/reservation.component';
 import { AuthentificationComponent } from './body/component/authentification/authentification.component';
 import { AdminModule } from './admin/admin.module';
+import { ServiceListComponent } from './body/component/service-list/service-list.component';
 
 const routes: Routes = [
   { path: 'reservation', component:ReservationComponent },
   { path: 'home', component: HomeComponent},
   { path: 'authentification', component: AuthentificationComponent},
   { path: 'admin', loadChildren: () => AdminModule },
+  { path: 'services', component: ServiceListComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

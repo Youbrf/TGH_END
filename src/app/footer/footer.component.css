@@ -1,0 +1,35 @@
+footer {
+    background-color: #f8f8f8;
+    padding: 40px 0;
+  }
+  
+  footer h4 {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  footer ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  footer ul li {
+    margin-bottom: 10px;
+  }
+  
+  .social-icons li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .social-icons li a {
+    color: #333;
+    font-size: 20px;
+  }
+  
+  .social-icons li a:hover {
+    color: #ffa500;
+  }
+  

@@ -1,0 +1,234 @@
+section {
+    height: 100vh;
+  }
+  
+/* HERO */
+.hero-section {
+    background-image: url("src/assets/images/home/uyj-min.jpg");
+    background-size: cover;
+    background-position: center;
+    text-align: left;
+    padding: 100px 20px; /* Ajustez les valeurs de padding selon vos besoins */
+  }
+  
+.hero-content {
+    max-width: 823px;
+    margin: 0 auto;
+  }
+  
+.hero-title {
+    font-family: "VotrePolice", sans-serif; /* Remplacez "VotrePolice" par le nom de la police que vous souhaitez utiliser */
+    font-size: 54px;
+    font-weight: bold;
+    margin-top: 50%;
+  }
+  
+.hero-description {
+    font-size: 18px;
+  }
+.hero-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ffa500; /* Couleur du bouton */
+    color: #fff; /* Couleur du texte du bouton */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+/* ABOUT */
+.about-section {
+    padding: 100px 0;
+    background-color: #f9f9f9; 
+  }
+  
+  .about-section h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .about-section p {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .image-container img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* SERVICES */
+  .services-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 50px;
+    text-align: center;
+  }
+  
+  .services-section h2 {
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    width: 420px; /* Ajustez la largeur des cards selon vos besoins */
+    height: 600px; /* Ajustez la hauteur des cards selon vos besoins */
+    margin-bottom: 20px;
+  }
+  
+  .card-img-top {
+    height: 400px; /* Ajustez la hauteur de l'image selon vos besoins */
+    object-fit: cover;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    font-size: 14px;
+  }
+  
+  .btn-primary {
+    background-color: #ffa500; /* Couleur du bouton */
+    border-color: #ffa500; /* Couleur de la bordure du bouton */
+    color: #fff; /* Couleur du texte du bouton */
+  }
+  
+  .btn-primary:hover {
+    background-color: #e59400; /* Couleur du bouton au survol */
+    border-color: #e59400; /* Couleur de la bordure du bouton au survol */
+    color: #fff; /* Couleur du texte du bouton au survol */
+  }
+  
+  /* GALLERY */
+  .gallery-section h2{
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 100px;
+    text-align: center;
+
+  }
+
+  .carousel-inner img {
+    max-height: 600px; /* Ajustez la hauteur maximale des images du carrousel selon vos besoins */
+    object-fit: cover;
+  }
+  
+  .carousel-indicators li {
+    background-color: #ffa500; /* Couleur des indicateurs du carrousel */
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: #ffa500; /* Couleur des icônes de navigation du carrousel */
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 30px; /* Ajustez la largeur des icônes de navigation du carrousel selon vos besoins */
+  }
+  
+  .carousel-control-prev {
+    left: -40px; /* Ajustez la position de l'icône de navigation précédente du carrousel */
+  }
+  
+  .carousel-control-next {
+    right: -40px; /* Ajustez la position de l'icône de navigation suivante du carrousel */
+  }
+  
+  /* CONTACT */
+
+  .contact-section {
+    padding: 100px 0;
+    text-align: center;
+  }
+  
+  .contact-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .contact-section .row {
+    margin-top: 50px;
+  }
+  
+  .contact-section h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .contact-section p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .map-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 75%; /* Ratio d'aspect de la carte (modifier selon vos besoins) */
+  }
+  
+  .map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  
+  .contact-section form {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .contact-section form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .contact-section form input[type="text"],
+  .contact-section form input[type="email"],
+  .contact-section form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .contact-section form textarea {
+    resize: vertical;
+    height: 150px;
+  }
+  
+  .contact-section form button[type="submit"] {
+    background-color: #ffa500;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .contact-section form button[type="submit"]:hover {
+    background-color: #e59400;
+  }
+  

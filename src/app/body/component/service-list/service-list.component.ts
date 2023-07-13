@@ -14,6 +14,7 @@ export class ServiceListComponent implements OnInit{
   services!: Service[];
   servicesByCategorie: { [idCategorie: number]: Service[] } = {};
   selectedServices: Service[] = [];
+  selectedCategorie!: CategorieService;
 
   constructor(private categorieService: CategorieServiceService, private router : Router) { }
 
@@ -37,6 +38,7 @@ export class ServiceListComponent implements OnInit{
 
   selectCategorie(categorie: CategorieService): void {
     this.services = this.servicesByCategorie[categorie.id];
+    this.selectedCategorie = categorie;
   }
 
   toggleSelection(service: Service): void {
@@ -79,5 +81,6 @@ export class ServiceListComponent implements OnInit{
     }
     this.router.navigate(['/reservation'], { queryParams: { services: JSON.stringify(this.selectedServices) } });
   }
+  
   
 }
