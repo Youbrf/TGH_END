@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthentificationService } from '../core/_service/authentification/authentification.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  connecter:boolean = false;
+
+  constructor(private auth: AuthentificationService){}
+
+  isConnecter(): boolean{
+    if (this.auth.getToken()) {
+      this.connecter=true;
+    }
+    return this.connecter;
+  }
+
+  logout(){
+    this.auth.clearTokenAndRole();
+  }
 
 }

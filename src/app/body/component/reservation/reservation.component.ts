@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
-import { Client, Estheticienne, Reservation, Service } from 'src/app/models/model';
+import { Reservation, Service, User } from 'src/app/models/model';
 
 @Component({
   selector: 'app-reservation',
@@ -25,8 +25,8 @@ export class ReservationComponent implements OnInit {
     dateModification: '',
     dateAnnulation: '',
     etatPaiement: '',
-    client: new Client(),
-    estheticienne: new Estheticienne(),
+    user: new User(),
+    employer: new User(),
     services: []
   };
 
@@ -53,12 +53,17 @@ export class ReservationComponent implements OnInit {
   
   calculateServiceDuration(res:Reservation) {
     this.duree=0;
-    res.services.forEach(e => {
+    if (res.services) {
+      res.services.forEach(e => {
       this.duree += e.duree;
     });
+    }
+    
     return this.duree;
   }
+
   PayerSurPlace() {
+    this.reservation.modePaiement = 'Sur place';
     this.rv.createReservation(this.reservation);
   }
 }

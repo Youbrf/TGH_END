@@ -1,0 +1,142 @@
+<div class="container">
+    <h1>Réservations</h1>
+
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="searchQuery" (ngModelChange)="searchReservations()" placeholder="Rechercher...">
+    </div>
+  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date de réservation</th>
+          <th>début</th>
+          <th>fin</th>
+          <th>Remarques</th>
+          <th>Statut</th>
+          <th>Montant</th>
+          <th>Mode de paiement</th>
+          <th>État de paiement</th>
+          <th>Esthéticienne</th>
+          <th>Utilisateur</th>
+          <th>Services</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{ reservation.dateReservation }}</td>
+          <td>{{ reservation.heureDebut }}</td>
+          <td>{{ reservation.heureFin }}</td>
+          <td>{{ reservation.remarquesSpeciales }}</td>
+          <td>{{ reservation.statutReservation }}</td>
+          <td>{{ reservation.montantTotal }}</td>
+          <td>{{ reservation.modePaiement }}</td>
+          <td>{{ reservation.etatPaiement }}</td>
+          <td>{{ reservation.employer.firstname }}</td>
+          <td>{{ reservation.user.firstname }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let service of reservation.services">{{ service.nom }}</li>
+            </ul>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="deleteReservation(reservation.id)">Supprimer</button>
+            <button class="btn btn-sm btn-primary" (click)="open(content, reservation)">Modifier</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-right">
+      <button class="btn btn-success btn-sm" [routerLink]="['create']">Ajouter une réservation</button>
+    </div>
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Mise à jour de la réservation</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="dateReservation">Date de réservation</label>
+            <div class="input-group">
+              <input
+                id="dateReservation"
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="dateReservation"
+                ngbDatepicker
+                #dp="ngbDatepicker"
+                [(ngModel)]="dateSelectionnee"
+              />
+              <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()" type="button"></button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="heureDebut">Heure de début</label>
+            <input type="text" class="form-control" id="heureDebut" name="heureDebut" [(ngModel)]="reservationToUpdate.heureDebut">
+          </div>
+          <div class="mb-3">
+            <label for="heureFin">Heure de fin</label>
+            <input type="text" class="form-control" id="heureFin" name="heureFin" [(ngModel)]="reservationToUpdate.heureFin">
+          </div>
+          <div class="mb-3">
+            <label for="remarquesSpeciales">Remarques spéciales</label>
+            <textarea class="form-control" id="remarquesSpeciales" name="remarquesSpeciales" [disabled]="true" [(ngModel)]="reservationToUpdate.remarquesSpeciales"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="statutReservation">Statut de la réservation</label>
+            <input type="text" class="form-control" id="statutReservation" name="statutReservation" [(ngModel)]="reservationToUpdate.statutReservation">
+          </div>
+          <div class="mb-3">
+            <label for="montantTotal">Montant total</label>
+            <input type="number" class="form-control" id="montantTotal" name="montantTotal" [(ngModel)]="reservationToUpdate.montantTotal">
+          </div>
+          <div class="mb-3">
+            <label for="modePaiement">Mode de paiement</label>
+            <input type="text" class="form-control" id="modePaiement" name="modePaiement" [(ngModel)]="reservationToUpdate.modePaiement">
+          </div>
+          <div class="mb-3">
+            <label for="etatPaiement">État de paiement</label>
+            <input type="text" class="form-control" id="etatPaiement" name="etatPaiement" [(ngModel)]="reservationToUpdate.etatPaiement">
+          </div>
+          <div class="mb-3">
+            <label for="dateCreation">Date de création</label>
+            <input type="text" class="form-control" id="dateCreation" name="dateCreation" [(ngModel)]="reservationToUpdate.dateCreation">
+          </div>
+          <div class="mb-3">
+            <label for="dateModification">Date de modification</label>
+            <input type="text" class="form-control" id="dateModification" name="dateModification" [(ngModel)]="reservationToUpdate.dateModification">
+          </div>
+          <div class="mb-3">
+            <label for="dateAnnulation">Date d'annulation</label>
+            <input type="text" class="form-control" id="dateAnnulation" name="dateAnnulation" [(ngModel)]="reservationToUpdate.dateAnnulation">
+          </div>
+          <div class="mb-3">
+            <label for="user">Utilisateur</label>
+            <select class="form-control" id="user" name="user" [(ngModel)]="reservationToUpdate.user">
+              <option [ngValue]="reservationToUpdate.user">{{ reservationToUpdate.user.firstname }}</option>
+              <option *ngFor="let user of users" [ngValue]="user">{{ user.firstname }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="employer">Employeur</label>
+            <select class="form-control" id="employer" name="employer" [(ngModel)]="reservationToUpdate.employer">
+              <option [ngValue]="reservationToUpdate.employer">{{ reservationToUpdate.employer.firstname }}</option>
+              <option *ngFor="let employer of employers" [ngValue]="employer">{{ employer.firstname }}</option>
+            </select>
+          </div>          
+          <div class="mb-3">
+            <label for="services">Services</label>
+            <ul>
+              <li *ngFor="let service of reservationToUpdate.services">{{ service.nom }}</li>
+            </ul>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="updateReservation()">Enregistrer</button>
+      </div>
+    </ng-template>
+       
+  </div>
+  

@@ -23,9 +23,11 @@
           <tbody>
             <tr>
               <td>{{ reservation.dateReservation | date:'short' }}</td>
-              <td *ngFor="let service of reservation.services">{{ service.nom }}</td>
+              <td><div *ngFor="let service of reservation.services">
+                {{ service.nom }} <br>
+              </div></td>
               <td>{{ duree }}</td>
-              <td>{{ reservation.estheticienne.nom }}</td>
+              <td>{{ reservation.employer.firstname }}</td>
               <td>
                 <textarea class="form-control" [(ngModel)]="reservation.remarquesSpeciales"></textarea>
               </td>

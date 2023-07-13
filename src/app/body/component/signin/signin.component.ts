@@ -35,6 +35,12 @@ export class SigninComponent {
       (reponse)=>{
         this.auth.saveTokenAndRole(reponse.access_token)
         alert('Bienvenue');
+        if (this.auth.getRole() === 'ADMIN') {
+          this.router.navigate(['/admin/dashboard']);
+        } else {
+          this.router.navigate(['/home']);
+        }
+        
       },
       (error)=>{
         alert('Erreur lors de la connection');
