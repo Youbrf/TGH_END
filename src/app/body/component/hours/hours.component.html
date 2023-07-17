@@ -20,6 +20,7 @@
       <div class="col-md-4">
         <ngb-datepicker
           [markDisabled]="isDisabled"
+          [minDate]="currentDate"
           [(ngModel)]="dateSelectionnee"
           (dateSelect)="genererHeuresDisponibles()"
         ></ngb-datepicker>
