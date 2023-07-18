@@ -39,6 +39,7 @@ export class HoursComponent implements OnInit {
     services: []
   };
   serviceDurationA!: number;
+  currentDate!:NgbDateStruct;
 
   constructor(private auth: AuthentificationService,private router: Router,private userS: UserService,private route: ActivatedRoute,private rv : ReservationService, private calendar: NgbCalendar) {
     this.dateSelectionnee = this.calendar.getToday();
@@ -46,7 +47,9 @@ export class HoursComponent implements OnInit {
 
   ngOnInit(): void {
     this.services = JSON.parse(this.route.snapshot.queryParamMap.get('services') ?? '[]');
-    this.isDisabled = (date: NgbDate) => this.calendar.getWeekday(date) >= 7 || this.calendar.getWeekday(date) == 1;
+    this.isDisabled = (date: NgbDate) => this.calendar.getWeekday(date) >= 7
+    this.dateSelectionnee = this.calendar.getToday();
+    this.currentDate = { year: this.dateSelectionnee.year, month: this.dateSelectionnee.month, day: this.dateSelectionnee.day };
     this.userS.getAllUsers().subscribe(users => {
       for (const user of users) {
         if (user.role === "EMPLOYEE") {
@@ -61,7 +64,7 @@ export class HoursComponent implements OnInit {
   }
 
   genererHeuresDisponibles() {
-    this.rv.searchReservation(this.dateSelectionnee).subscribe({
+    this.rv.searchReservation(this.dateSelectionnee,this.employeSelectionne).subscribe({
       next: data => {
         this.reservation = data;
         const openingTime = new Date().setHours(9, 0, 0);

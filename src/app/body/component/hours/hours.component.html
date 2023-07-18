@@ -1,33 +1,46 @@
-<div class="col-md-6">
-    <label for="employe">Employé:</label>
-    <select id="employe" [(ngModel)]="employeSelectionne">
-        <option *ngFor="let employe of employes" [value]="employe.id">{{ employe.firstname }}</option>
-    </select>
-</div>
+<div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="employe">Sélectionnez l'employé:</label>
+          <select id="employe" [(ngModel)]="employeSelectionne"(change)="genererHeuresDisponibles()" class="form-control">
+            <option *ngFor="let employe of employes" [value]="employe.id">{{ employe.firstname }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
 
-<div *ngIf="heureSelectionnee!" class="row">
-    Heure sélectionnée : {{heureSelectionnee}}
-</div>
-<div class="row">
-    <div class="col-md-6">
+    <div *ngIf="heureSelectionnee" class="row">
+      <div class="col-md-12">
+        <p class="text-primary">Heure sélectionnée - {{heureSelectionnee}}</p>
+      </div>
+    </div>
+  
+    <div *ngIf="availableHours.length > 0" class="row">
+      <div class="col-md-4">
         <ngb-datepicker
-            [markDisabled]="isDisabled"
-            [(ngModel)]="dateSelectionnee"
-            (dateSelect)="genererHeuresDisponibles()"
-            [displayMonths]=2 >
-        </ngb-datepicker>
-    </div>
-    <div class="col-md-4">
-        <h3>Heures disponibles</h3>
-        <p *ngIf="availableHours.length === 0">Aucune heure disponible pour le moment.</p>
-        <ul *ngIf="availableHours.length > 0" >
-            <li *ngFor="let heure of availableHours" (click)="selectionnerHeure(heure)">
-            {{ heure }}
+          [markDisabled]="isDisabled"
+          [minDate]="currentDate"
+          [(ngModel)]="dateSelectionnee"
+          (dateSelect)="genererHeuresDisponibles()"
+        ></ngb-datepicker>
+      </div>
+  
+      <div *ngIf="availableHours.length > 0" class="col-md-7">
+        <h6>Sélectionnez l'heure de début de votre rendez-vous</h6>
+        <div class="list-container">
+          <ul class="list-group">
+            <li *ngFor="let heure of availableHours" (click)="selectionnerHeure(heure)" class="list-group-item list-group-item-action">
+              {{ heure }}
             </li>
-        </ul>
+          </ul>
+          <p *ngIf="availableHours.length === 0">Aucune heure disponible pour le moment.</p>
+        </div>
+      </div>
+      
+  
+      <div class="col-md-12" *ngIf="heureSelectionnee">
+        <button class="btn btn-primary mt-3" (click)="redirigerVersFormulaire()">Réserver</button>
+      </div>
     </div>
-    <div class="col-md-2" *ngIf="heureSelectionnee!">
-        <button class="btn btn-primary" (click)="redirigerVersFormulaire()">Réserver</button>
-    </div>
-</div>
-
+  </div>

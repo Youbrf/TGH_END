@@ -1,31 +1,46 @@
+<section class="reservation-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="reservation-title">Réservation</h1>
+      </div>
 
-<div class="container my-5">
-  <div class="row">
-    <h1>Réservation</h1>
-    <div class="col-md-12" *ngIf="services.length>0" >
-      <h2 class="mt-5 mb-3">Services :</h2>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let service of services">{{service.nom}} ({{service.prix}} € - {{service.duree}} min)</li>
-      </ul>
-    </div>
-      <app-hours *ngIf="!reservation.services"></app-hours>
-      <div *ngIf="reservation.services">
-        <table class="table table-striped">
+      <div class="col-7" *ngIf="!reservation.services">
+        <app-hours></app-hours>
+      </div>
+
+      <div class="col-md-5" *ngIf="services.length > 0">
+        <h4 class="section-title">Mon panier :</h4>
+        <div class="services-list">
+          <div class="service-item row" *ngFor="let service of services">
+                <div class="col-12 service-name">{{ service.nom }}</div>
+                <div class="col-6 service-duration">{{ service.duree }} min</div>
+                <div class="col-6 service-price">{{ service.prix }} €</div>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+      <div class="col-12" *ngIf="reservation.services">
+        <table class="table table-striped reservation-table">
           <thead>
             <tr>
               <th>Date de réservation</th>
               <th>Service</th>
               <th>Durée</th>
               <th>Esthéticienne</th>
-              <th>Commentaire</th> <!-- Nouvelle colonne pour le commentaire -->
+              <th>Commentaire</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>{{ reservation.dateReservation | date:'short' }}</td>
-              <td><div *ngFor="let service of reservation.services">
-                {{ service.nom }} <br>
-              </div></td>
+              <td>
+                <div *ngFor="let service of reservation.services">
+                  {{ service.nom }} <br>
+                </div>
+              </td>
               <td>{{ duree }}</td>
               <td>{{ reservation.employer.firstname }}</td>
               <td>
@@ -36,5 +51,6 @@
         </table>
         <button class="btn btn-primary" (click)="PayerSurPlace()">Payer sur place</button>
       </div>
+    </div>
   </div>
-</div>
+</section>

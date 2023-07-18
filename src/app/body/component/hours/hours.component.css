@@ -1,0 +1,20 @@
+.container {
+    padding-left: 10px;
+}
+.text-primary {
+    font-size: 18px;
+    font-weight: bold;
+}
+.list-group {
+    margin-top: 20px;
+}
+.list-group-item {
+    cursor: pointer;
+}
+.btn-primary {
+    margin-top: 20px;
+}
+.list-container {
+    height: 250px;
+    overflow: auto;
+}
