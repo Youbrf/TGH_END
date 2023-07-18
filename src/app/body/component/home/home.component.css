@@ -26,15 +26,6 @@ section {
 .hero-description {
     font-size: 18px;
   }
-.hero-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #ffa500; /* Couleur du bouton */
-    color: #fff; /* Couleur du texte du bouton */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
   
 /* ABOUT */
 .about-section {
