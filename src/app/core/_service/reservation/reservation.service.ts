@@ -23,9 +23,9 @@ export class ReservationService {
     return this.HTTP.get<Reservation[]>(API_URL+'RendezVous');
   }
 
-  searchReservation(date: NgbDateStruct): Observable<Reservation[]> {
+  searchReservation(date: NgbDateStruct,idEmploye :number): Observable<Reservation[]> {
     const params = new HttpParams().set('date', `${date.year}-${sprintf('%02d', date.month)}-${sprintf('%02d', date.day)}`);
-    return this.HTTP.get<Reservation[]>(API_URL+"RendezVous/search", { params });
+    return this.HTTP.get<Reservation[]>(API_URL+"RendezVous/search/"+idEmploye, { params });
   }
   
   

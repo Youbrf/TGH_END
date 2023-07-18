@@ -64,7 +64,7 @@ export class HoursComponent implements OnInit {
   }
 
   genererHeuresDisponibles() {
-    this.rv.searchReservation(this.dateSelectionnee).subscribe({
+    this.rv.searchReservation(this.dateSelectionnee,this.employeSelectionne).subscribe({
       next: data => {
         this.reservation = data;
         const openingTime = new Date().setHours(9, 0, 0);

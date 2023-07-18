@@ -3,7 +3,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="employe">Sélectionnez l'employé:</label>
-          <select id="employe" [(ngModel)]="employeSelectionne" class="form-control">
+          <select id="employe" [(ngModel)]="employeSelectionne"(change)="genererHeuresDisponibles()" class="form-control">
             <option *ngFor="let employe of employes" [value]="employe.id">{{ employe.firstname }}</option>
           </select>
         </div>
@@ -16,7 +16,7 @@
       </div>
     </div>
   
-    <div class="row">
+    <div *ngIf="availableHours.length > 0" class="row">
       <div class="col-md-4">
         <ngb-datepicker
           [markDisabled]="isDisabled"
@@ -26,10 +26,10 @@
         ></ngb-datepicker>
       </div>
   
-      <div class="col-md-7">
+      <div *ngIf="availableHours.length > 0" class="col-md-7">
         <h6>Sélectionnez l'heure de début de votre rendez-vous</h6>
         <div class="list-container">
-          <ul *ngIf="availableHours.length > 0" class="list-group">
+          <ul class="list-group">
             <li *ngFor="let heure of availableHours" (click)="selectionnerHeure(heure)" class="list-group-item list-group-item-action">
               {{ heure }}
             </li>
