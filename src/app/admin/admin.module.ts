@@ -15,6 +15,7 @@ import { EmployerListComponent } from './employer-list/employer-list.component';
 import { MainComponent } from './main/main.component';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { HistoryReservationUserComponent } from './history-reservation-user/history-reservation-user.component';
+import { ProfilComponent } from './profil/profil.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { HistoryReservationUserComponent } from './history-reservation-user/hist
     DashboardComponent,
     EmployerListComponent,
     MainComponent,
-    HistoryReservationUserComponent
+    HistoryReservationUserComponent,
+    ProfilComponent
   ],
   imports: [
     CommonModule,

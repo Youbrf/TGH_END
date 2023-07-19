@@ -1,0 +1,33 @@
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-black text-white text-center">
+          <h3>Profil Utilisateur</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="firstname">Prénom :</label>
+            <input type="text" class="form-control" id="firstname" [(ngModel)]="user.firstname" disabled>
+          </div>
+          <div class="form-group">
+            <label for="lastname">Nom :</label>
+            <input type="text" class="form-control" id="lastname" [(ngModel)]="user.lastname" disabled>
+          </div>
+          <div class="form-group">
+            <label for="email">Email :</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="user.email" disabled>
+          </div>
+          <div class="form-group">
+            <label for="numérogsm">Numéro de GSM :</label>
+            <input type="text" class="form-control" id="numérogsm" [(ngModel)]="user.gsm" disabled>
+          </div>
+          <div class="d-flex justify-content-center mt-4">
+            <button class="btn btn-success mr-3" [routerLink]="[user.id,'edit']">Modifier</button>
+            <button class="btn btn-info" [routerLink]="[user.id,'history']">Historique des réservations</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

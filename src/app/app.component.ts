@@ -10,7 +10,7 @@ import { AuthentificationService } from './core/_service/authentification/authen
 export class AppComponent {
   title = 'tgh_end';
   isAdmin: boolean = false;
-  constructor(private router: Router,private auth: AuthentificationService) {}
+  constructor(private auth: AuthentificationService) {}
 
   isAdminUser(): boolean { 
     if (this.auth.getRole()==='ADMIN') {
