@@ -4,38 +4,38 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" routerLink="/admin/dashboard">
+            <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive="active">
               <i class="fas fa-tachometer-alt"></i> Tableau de bord
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/admin/users">
+            <a class="nav-link" routerLink="/admin/users" routerLinkActive="active">
               <i class="fas fa-users"></i> Clients
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/admin/employers">
+            <a class="nav-link" routerLink="/admin/employers" routerLinkActive="active">
               <i class="fas fa-users"></i> Employés
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/admin/services">
+            <a class="nav-link" routerLink="/admin/services" routerLinkActive="active">
               <i class="fas fa-cogs"></i> Services
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/admin/reservations">
+            <a class="nav-link" routerLink="/admin/reservations" routerLinkActive="active">
               <i class="fas fa-calendar-alt"></i> Réservations
             </a>
           </li>
-          <li class="nav-item" >
-            <a class="nav-link" href="home" (click)="logout()">Déconnection</a>
+          <li class="nav-item">
+            <a class="nav-link" href="home" (click)="logout()">Déconnexion</a>
           </li>
         </ul>
       </div>
     </nav>
     
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
       <router-outlet></router-outlet>
     </main>
   </div>

@@ -44,4 +44,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+  <div class="text-right">
+    <button class="btn btn-success btn-sm" [routerLink]="['create']">Ajouter un client</button>
+  </div>
 </div>
