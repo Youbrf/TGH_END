@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthentificationService } from 'src/app/core/_service/authentification/authentification.service';
 import { UserService } from 'src/app/core/_service/user/user.service';
 import { User } from 'src/app/models/model';
 
@@ -12,16 +13,25 @@ export class UserEditComponent {
   user: User = new User;
   userId!: number;
   showPassword: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private auth: AuthentificationService
   ) {}
 
   ngOnInit() {
     this.userId = +this.route.snapshot.params['id']; 
     this.getUserDetails();
+  }
+
+  isAdminUser(): boolean { 
+    if (this.auth.getRole()==='ADMIN') {
+      this.isAdmin = true; 
+    }
+    return this.isAdmin;
   }
 
   getUserDetails() {
@@ -43,7 +53,11 @@ export class UserEditComponent {
         (updatedUser: User) => {
           console.log('Utilisateur mis à jour avec succès :', updatedUser);
           alert('Utilisateur mis à jour avec succès');
-          this.router.navigate(['/admin/users', this.user.id]);
+          if (this.user.role === "USER") {
+            this.router.navigate(['/admin/profil']);
+          }else{
+            this.router.navigate(['/admin/users', this.user.id]);
+          }
         },
         (error) => {
           console.log('Une erreur s\'est produite lors de la mise à jour de l\'utilisateur :', error);

@@ -11,6 +11,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { EmployerListComponent } from './employer-list/employer-list.component';
 import { MainComponent } from './main/main.component';
 import { HistoryReservationUserComponent } from './history-reservation-user/history-reservation-user.component';
+import { ProfilComponent } from './profil/profil.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,9 @@ const routes: Routes = [
       { path: 'services/create', component: ServiceCreateComponent },
       { path: 'reservations', component: ReservationListComponent },
       { path: 'reservations/create', component: ReservationCreateComponent },
+      { path: 'profil', component: ProfilComponent},
+      { path: 'profil/:id/history', component: HistoryReservationUserComponent},
+      { path: 'profil/:id/edit', component: UserEditComponent },
     ]
   }
   

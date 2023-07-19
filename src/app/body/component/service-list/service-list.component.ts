@@ -15,12 +15,35 @@ export class ServiceListComponent implements OnInit{
   servicesByCategorie: { [idCategorie: number]: Service[] } = {};
   selectedServices: Service[] = [];
   selectedCategorie!: CategorieService;
+  searchTerm: string = '';
+  allServices: Service[] = [];
 
   constructor(private categorieService: CategorieServiceService, private router : Router) { }
 
   ngOnInit() {
     this.loadCategories();
+    this.loadAllServices();
   }
+
+  loadAllServices(): void {
+    this.categorieService.getAllServices().subscribe(services => {
+      this.allServices = services;
+    });
+  }
+
+  searchServices(): void {
+    if (!this.searchTerm.trim()) {
+      // Si le terme de recherche est vide, afficher tous les services de la catégorie sélectionnée
+      this.services = this.servicesByCategorie[this.selectedCategorie.id];
+    } else {
+      // Si le terme de recherche n'est pas vide, filtrer les services par nom
+      this.services = this.allServices.filter(service =>
+        service.nom.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+  }
+
+
   loadCategories(): void {
     this.categorieService.getAllCategories().subscribe(categories => {
       this.categories = categories;
