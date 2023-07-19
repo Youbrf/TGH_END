@@ -28,7 +28,7 @@
           <a class="nav-link" href="home" *ngIf="isConnecter()" (click)="logout()">Déconnection</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="admin/profil">
+          <a class="nav-link" href="admin/profil" *ngIf="isConnecter()">
             <i class="far fa-user-circle fa-lg" style="color: #000000;"></i>
           </a>
         </li>
