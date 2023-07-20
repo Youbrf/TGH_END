@@ -6,52 +6,32 @@
   <table mat-table [dataSource]="reservations" matSort>
 
     <ng-container matColumnDef="dateReservation">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date de réservation</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
       <td mat-cell *matCellDef="let reservation">{{ reservation.dateReservation }}</td>
     </ng-container>
 
     <ng-container matColumnDef="heureDebut">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Heure de début</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>début</th>
       <td mat-cell *matCellDef="let reservation">{{ reservation.heureDebut }}</td>
     </ng-container>
 
     <ng-container matColumnDef="heureFin">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Heure de fin</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>fin</th>
       <td mat-cell *matCellDef="let reservation">{{ reservation.heureFin }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="remarquesSpeciales">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Remarques spéciales</th>
-      <td mat-cell *matCellDef="let reservation">{{ reservation.remarquesSpeciales }}</td>
-    </ng-container>
-
     <ng-container matColumnDef="statutReservation">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Statut de réservation</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Statut</th>
       <td mat-cell *matCellDef="let reservation">{{ reservation.statutReservation }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="montantTotal">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Montant total</th>
-      <td mat-cell *matCellDef="let reservation">{{ reservation.montantTotal }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="modePaiement">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Mode de paiement</th>
-      <td mat-cell *matCellDef="let reservation">{{ reservation.modePaiement }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="etatPaiement">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>État de paiement</th>
-      <td mat-cell *matCellDef="let reservation">{{ reservation.etatPaiement }}</td>
-    </ng-container>
-
     <ng-container matColumnDef="employer.firstname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom de l'employé</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Esthéticien(ne)</th>
       <td mat-cell *matCellDef="let reservation">{{ reservation.employer.firstname }}</td>
     </ng-container>
 
     <ng-container matColumnDef="user.firstname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom de l'utilisateur</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Client</th>
       <td mat-cell *matCellDef="let reservation">{{ reservation.user.firstname }}</td>
     </ng-container>
 
@@ -70,6 +50,7 @@
       <td mat-cell *matCellDef="let reservation">
         <button class="btn btn-sm btn-danger" (click)="deleteReservation(reservation.id)">Supprimer</button>
         <button class="btn btn-sm btn-primary" (click)="open(content, reservation)">Modifier</button>
+        <button class="btn btn-sm btn-success" (click)="openD(contentD,reservation)">Détails</button>
       </td>
     </ng-container>
 
@@ -82,6 +63,71 @@
   </div>
 </div>
 
+<ng-template #contentD let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Détails de la réservation</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <table class="table">
+      <tr>
+        <th>Date de réservation</th>
+        <td>{{ reservationToDetails.dateReservation }}</td>
+      </tr>
+      <tr>
+        <th>Heure de début</th>
+        <td>{{ reservationToDetails.heureDebut }}</td>
+      </tr>
+      <tr>
+        <th>Heure de fin</th>
+        <td>{{ reservationToDetails.heureFin }}</td>
+      </tr>
+      <tr>
+        <th>Remarques</th>
+        <td>{{ reservationToDetails.remarquesSpeciales }}</td>
+      </tr>
+      <tr>
+        <th>Statut</th>
+        <td>{{ reservationToDetails.statutReservation }}</td>
+      </tr>
+      <tr>
+        <th>Montant Total</th>
+        <td>{{ reservationToDetails.montantTotal }}</td>
+      </tr>
+      <tr>
+        <th>Mode de paiement</th>
+        <td>{{ reservationToDetails.modePaiement }}</td>
+      </tr>
+      <tr>
+        <th>État de paiement</th>
+        <td>{{ reservationToDetails.etatPaiement }}</td>
+      </tr>
+      <tr>
+        <th>Date d'annulation</th>
+        <td>{{ reservationToDetails.dateAnnulation }}</td>
+      </tr>
+      <tr>
+        <th>Client</th>
+        <td>{{ reservationToDetails.user.firstname }}</td>
+      </tr>
+      <tr>
+        <th>Esthéticien(ne)</th>
+        <td>{{ reservationToDetails.employer.firstname }}</td>
+      </tr>
+      <tr>
+        <th>Services</th>
+        <td>
+          <ul>
+            <li *ngFor="let service of reservationToDetails.services">{{ service.nom }}</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss()">Fermer</button>
+  </div>
+</ng-template>
 
     <ng-template #content let-modal>
       <div class="modal-header">

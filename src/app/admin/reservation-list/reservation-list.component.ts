@@ -24,11 +24,7 @@ export class ReservationListComponent {
     'dateReservation',
     'heureDebut',
     'heureFin',
-    'remarquesSpeciales',
     'statutReservation',
-    'montantTotal',
-    'modePaiement',
-    'etatPaiement',
     'employer.firstname',
     'user.firstname',
     'services',
@@ -37,6 +33,7 @@ export class ReservationListComponent {
 
   @ViewChild(MatSort, { static: true }) sort!: MatSort | null;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator | null;
+  reservationToDetails:Reservation=new Reservation();
 
   constructor(
     private userService: UserService,
@@ -86,6 +83,19 @@ export class ReservationListComponent {
     this.reservationToUpdate = { ...reservation };
 
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      },
+    );
+  }
+
+  openD(contentD: any, reservation: Reservation) {
+    
+    this.reservationToDetails = { ...reservation };
+    this.modalService.open(contentD, { ariaLabelledBy: 'modal-basic-title' }).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
       },
