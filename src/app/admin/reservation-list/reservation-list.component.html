@@ -48,9 +48,9 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let reservation">
-        <button class="btn btn-sm btn-danger" (click)="deleteReservation(reservation.id)">Supprimer</button>
+        <button *ngIf="isAdminUser();" class="btn btn-sm btn-danger" (click)="deleteReservation(reservation.id)">Supprimer</button>
         <button class="btn btn-sm btn-primary" (click)="open(content, reservation)">Modifier</button>
-        <button class="btn btn-sm btn-success" (click)="openD(contentD,reservation)">Détails</button>
+        <button class="btn btn-sm btn-success ml-1" (click)="openD(contentD,reservation)">Détails</button>
       </td>
     </ng-container>
 
@@ -166,7 +166,9 @@
           </div>
           <div class="mb-3">
             <label for="statutReservation">Statut de la réservation</label>
-            <input type="text" class="form-control" id="statutReservation" name="statutReservation" [(ngModel)]="reservationToUpdate.statutReservation">
+            <select class="form-control" id="statutReservation" name="statutReservation" [(ngModel)]="reservationToUpdate.statutReservation">
+              <option *ngFor="let status of reservationStatuses" [value]="status">{{ status }}</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="montantTotal">Montant total</label>
@@ -178,7 +180,9 @@
           </div>
           <div class="mb-3">
             <label for="etatPaiement">État de paiement</label>
-            <input type="text" class="form-control" id="etatPaiement" name="etatPaiement" [(ngModel)]="reservationToUpdate.etatPaiement">
+            <select class="form-control" id="etatPaiement" name="etatPaiement" [(ngModel)]="reservationToUpdate.etatPaiement">
+              <option *ngFor="let paymentState of paymentStates" [value]="paymentState">{{ paymentState }}</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="dateCreation">Date de création</label>

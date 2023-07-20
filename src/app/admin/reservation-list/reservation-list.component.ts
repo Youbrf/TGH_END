@@ -38,6 +38,9 @@ export class ReservationListComponent {
   reservationToDetails:Reservation=new Reservation();
   idUser!: number;
   isAdmin: boolean = false;
+  reservationStatuses: string[] = ["CONFIRMED", "PENDING", "CANCELLED"];
+  paymentStates: string[] = ["PAID", "UNPAID"];
+  
   constructor(
     private userService: UserService,
     private reservationService: ReservationService,
