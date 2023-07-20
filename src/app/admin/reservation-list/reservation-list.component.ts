@@ -2,7 +2,9 @@ import { Component, ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 import { ModalDismissReasons, NgbDateParserFormatter, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthentificationService } from 'src/app/core/_service/authentification/authentification.service';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
 import { UserService } from 'src/app/core/_service/user/user.service';
 import { Reservation, User } from 'src/app/models/model';
@@ -34,21 +36,49 @@ export class ReservationListComponent {
   @ViewChild(MatSort, { static: true }) sort!: MatSort | null;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator | null;
   reservationToDetails:Reservation=new Reservation();
-
+  idUser!: number;
+  isAdmin: boolean = false;
   constructor(
     private userService: UserService,
     private reservationService: ReservationService,
     private modalService: NgbModal,
-    private parserFormatter: NgbDateParserFormatter
+    private parserFormatter: NgbDateParserFormatter,
+    private route: ActivatedRoute,
+    private auth : AuthentificationService
   ) {}
 
   ngOnInit() {
+    this.idUser = +this.route.snapshot.params['id'];
+    if (!this.isAdmin) {
+      const indexToRemove = this.displayedColumns.indexOf('user.firstname');
+      if (indexToRemove !== -1) {
+        this.displayedColumns.splice(indexToRemove, 1);
+      }
+    }
     this.loadReservations();
     this.loadUserAndEmployer();
   }
 
+  isAdminUser(): boolean { 
+    if (this.auth.getRole()==='ADMIN') {
+      this.isAdmin = true; 
+    }
+    return this.isAdmin;
+  }
+
   loadReservations() {
-    this.reservationService.getAllReservation().subscribe(reservations => {
+    if (this.idUser != null) {
+      this.reservationService.getReservationByUser(this.idUser).subscribe(reservations => {
+        this.reservations = new MatTableDataSource(reservations);
+        this.reservations.sort = this.sort;
+        this.reservations.paginator = this.paginator;
+        this.reservations.filterPredicate = (data: Reservation, filter: string) => {
+          const dataStr = JSON.stringify(data).toLowerCase();
+          return dataStr.indexOf(filter) != -1;
+        };
+      });
+    } else {
+      this.reservationService.getAllReservation().subscribe(reservations => {
       this.reservations = new MatTableDataSource(reservations);
       this.reservations.sort = this.sort;
       this.reservations.paginator = this.paginator;
@@ -57,6 +87,7 @@ export class ReservationListComponent {
         return dataStr.indexOf(filter) != -1;
       };
     });
+    }
   }
 
   loadUserAndEmployer() {

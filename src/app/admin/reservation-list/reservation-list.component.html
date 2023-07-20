@@ -30,8 +30,8 @@
       <td mat-cell *matCellDef="let reservation">{{ reservation.employer.firstname }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="user.firstname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Client</th>
+    <ng-container *ngIf="isAdminUser();" matColumnDef="user.firstname">
+      <th  mat-header-cell *matHeaderCellDef mat-sort-header >Client</th>
       <td mat-cell *matCellDef="let reservation">{{ reservation.user.firstname }}</td>
     </ng-container>
 
@@ -60,6 +60,7 @@
   <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
   <div class="text-right">
     <button class="btn btn-success btn-sm" [routerLink]="['create']">Ajouter une réservation</button>
+    <button *ngIf="!isAdminUser();" class="btn btn-secondary btn-sm ml-2" routerLink="../..">Retour</button>
   </div>
 </div>
 
