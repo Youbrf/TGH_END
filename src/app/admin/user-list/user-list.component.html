@@ -5,31 +5,26 @@
   </mat-form-field>
   <table mat-table [dataSource]="dataSource" matSort>
 
-    <!-- Nom Column -->
     <ng-container matColumnDef="lastname">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
       <td mat-cell *matCellDef="let user">{{ user?.lastname }}</td>
     </ng-container>
 
-    <!-- Prénom Column -->
     <ng-container matColumnDef="firstname">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Prénom</th>
       <td mat-cell *matCellDef="let user">{{ user?.firstname }}</td>
     </ng-container>
 
-    <!-- Email Column -->
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
       <td mat-cell *matCellDef="let user">{{ user?.email }}</td>
     </ng-container>
 
-    <!-- Gsm Column -->
     <ng-container matColumnDef="gsm">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Gsm</th>
       <td mat-cell *matCellDef="let user">{{ user?.gsm }}</td>
     </ng-container>
 
-    <!-- Actions Column -->
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let user">

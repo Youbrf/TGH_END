@@ -18,7 +18,7 @@ export class UserListComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort!: MatSort | null;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator | null;
 
-  constructor(private userService : UserService,private router:Router){}
+  constructor(private userService : UserService){}
 
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe(users => {
