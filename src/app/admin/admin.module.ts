@@ -20,6 +20,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { StatistiquesComponent } from './statistiques/statistiques.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     EmployerListComponent,
     MainComponent,
     HistoryReservationUserComponent,
-    ProfilComponent
+    ProfilComponent,
+    StatistiquesComponent
   ],
   imports: [
     CommonModule,

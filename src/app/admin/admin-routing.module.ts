@@ -12,6 +12,7 @@ import { EmployerListComponent } from './employer-list/employer-list.component';
 import { MainComponent } from './main/main.component';
 import { HistoryReservationUserComponent } from './history-reservation-user/history-reservation-user.component';
 import { ProfilComponent } from './profil/profil.component';
+import { StatistiquesComponent } from './statistiques/statistiques.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
       { path: 'profil', component: ProfilComponent},
       { path: 'profil/:id/history', component: ReservationListComponent},
       { path: 'profil/:id/edit', component: UserEditComponent },
+      { path: 'statistiques', component: StatistiquesComponent}
     ]
   }
   
