@@ -1,5 +1,10 @@
-import { Component} from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 import { ModalDismissReasons, NgbDateParserFormatter, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthentificationService } from 'src/app/core/_service/authentification/authentification.service';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
 import { UserService } from 'src/app/core/_service/user/user.service';
 import { Reservation, User } from 'src/app/models/model';
@@ -11,34 +16,91 @@ import { Reservation, User } from 'src/app/models/model';
 })
 export class ReservationListComponent {
   dateSelectionnee!: NgbDateStruct;
-  reservations!: Reservation[];
   searchQuery!: string;
   closeResult = '';
   reservationToUpdate: Reservation = new Reservation();
   employers: User[] = [];
   users: User[] = [];
+  reservations!: MatTableDataSource<Reservation>;
+  displayedColumns: string[] = [
+    'dateReservation',
+    'heureDebut',
+    'heureFin',
+    'statutReservation',
+    'employer.firstname',
+    'user.firstname',
+    'services',
+    'actions'
+  ];
 
-  constructor(private userService: UserService,private reservationService: ReservationService,private modalService: NgbModal,private parserFormatter: NgbDateParserFormatter) { }
+  @ViewChild(MatSort, { static: true }) sort!: MatSort | null;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator | null;
+  reservationToDetails:Reservation=new Reservation();
+  idUser!: number;
+  isAdmin: boolean = false;
+  reservationStatuses: string[] = ["CONFIRMED", "PENDING", "CANCELLED"];
+  paymentStates: string[] = ["PAID", "UNPAID"];
+  
+  constructor(
+    private userService: UserService,
+    private reservationService: ReservationService,
+    private modalService: NgbModal,
+    private parserFormatter: NgbDateParserFormatter,
+    private route: ActivatedRoute,
+    private auth : AuthentificationService
+  ) {}
 
   ngOnInit() {
+    this.idUser = +this.route.snapshot.params['id'];
+    if (!this.isAdmin) {
+      const indexToRemove = this.displayedColumns.indexOf('user.firstname');
+      if (indexToRemove !== -1) {
+        this.displayedColumns.splice(indexToRemove, 1);
+      }
+    }
     this.loadReservations();
     this.loadUserAndEmployer();
   }
 
-  loadReservations() {
-    this.reservationService.getAllReservation().subscribe(reservations => {
-      this.reservations = reservations;
-    });
+  isAdminUser(): boolean { 
+    if (this.auth.getRole()==='ADMIN') {
+      this.isAdmin = true; 
+    }
+    return this.isAdmin;
   }
 
-  loadUserAndEmployer(){
-    this.userService.getAllUsers().subscribe(users =>{
+  loadReservations() {
+    if (this.idUser != null) {
+      this.reservationService.getReservationByUser(this.idUser).subscribe(reservations => {
+        this.reservations = new MatTableDataSource(reservations);
+        this.reservations.sort = this.sort;
+        this.reservations.paginator = this.paginator;
+        this.reservations.filterPredicate = (data: Reservation, filter: string) => {
+          const dataStr = JSON.stringify(data).toLowerCase();
+          return dataStr.indexOf(filter) != -1;
+        };
+      });
+    } else {
+      this.reservationService.getAllReservation().subscribe(reservations => {
+      this.reservations = new MatTableDataSource(reservations);
+      this.reservations.sort = this.sort;
+      this.reservations.paginator = this.paginator;
+      this.reservations.filterPredicate = (data: Reservation, filter: string) => {
+        const dataStr = JSON.stringify(data).toLowerCase();
+        return dataStr.indexOf(filter) != -1;
+      };
+    });
+    }
+  }
+
+  loadUserAndEmployer() {
+    this.userService.getAllUsers().subscribe(users => {
       for (const user of users) {
         if (user.role === 'USER') {
-            this.users.push(user);
+          this.users.push(user);
         }
         if (user.role === 'EMPLOYEE') {
-            this.employers.push(user);
+          this.employers.push(user);
         }
       }
     });
@@ -51,7 +113,7 @@ export class ReservationListComponent {
     } else {
       console.log('La conversion de la date a échoué');
     }
-    
+
     this.reservationToUpdate = { ...reservation };
 
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
@@ -64,7 +126,20 @@ export class ReservationListComponent {
     );
   }
 
-	private getDismissReason(reason: any): string {
+  openD(contentD: any, reservation: Reservation) {
+    
+    this.reservationToDetails = { ...reservation };
+    this.modalService.open(contentD, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      },
+    );
+  }
+
+  private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -73,16 +148,29 @@ export class ReservationListComponent {
       return `with: ${reason}`;
     }
   }
+
   searchReservations() {
+    this.reservations.filter = this.searchQuery.trim().toLowerCase();
   }
 
-  deleteReservation(id: number) { 
+  deleteReservation(id: number) {
     this.reservationService.deleteReservation(id);
   }
 
   updateReservation() {
-    this.reservationToUpdate.dateReservation = new Date(this.dateSelectionnee.year,this.dateSelectionnee.month-1,this.dateSelectionnee.day+1);
-    this.reservationService.updateRendezVous(this.reservationToUpdate.id,this.reservationToUpdate);
-   console.log(this.reservationToUpdate);
+    this.reservationToUpdate.dateReservation = new Date(
+      this.dateSelectionnee.year,
+      this.dateSelectionnee.month - 1,
+      this.dateSelectionnee.day + 1
+    );
+    this.reservationService.updateRendezVous(this.reservationToUpdate.id, this.reservationToUpdate);
   }
+
+  applyFilter(filterValue: string) {
+    this.reservations.filter = filterValue.trim().toLowerCase();
+    if (this.reservations.paginator) {
+      this.reservations.paginator.firstPage();
+    }
+  }
+  
 }

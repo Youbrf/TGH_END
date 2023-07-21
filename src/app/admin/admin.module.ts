@@ -16,6 +16,10 @@ import { MainComponent } from './main/main.component';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { HistoryReservationUserComponent } from './history-reservation-user/history-reservation-user.component';
 import { ProfilComponent } from './profil/profil.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -39,7 +43,11 @@ import { ProfilComponent } from './profil/profil.component';
     FormsModule,
     ReactiveFormsModule,
     NgbDatepickerModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    MatTableModule,
+    MatSortModule,
+    MatInputModule,
+    MatPaginatorModule
   ],
   exports:[
     DashboardComponent

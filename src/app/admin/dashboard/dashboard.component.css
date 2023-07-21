@@ -1,0 +1,40 @@
+/* Add a fixed height to the sidebar and make it scrollable */
+.sidebar {
+    height: 100vh;
+  }
+  
+  /* Center the icons vertically in the sidebar */
+  .sidebar .nav-link i {
+    line-height: 24px;
+  }
+  
+  /* Add some padding and styling to the navbar links */
+  .sidebar .nav-link {
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #333; /* Change the link color */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smooth animation */
+  }
+  
+  /* Add a background color and adjust font color for active links */
+  .sidebar .nav-link.active {
+    background-color: #007bff; /* Change the active link background color */
+    color: #fff; /* Change the active link font color to white */
+  }
+  
+  /* Add a hover effect to the links */
+  .sidebar .nav-link:hover {
+    background-color: #f0f0f0; /* Change the link hover background color */
+  }
+  
+  /* Apply responsive styles for smaller screens */
+  @media (max-width: 768px) {
+    .sidebar {
+      display: none; /* Hide the sidebar on smaller screens */
+    }
+  
+    .main-content {
+      margin-left: 15px; /* Add some left margin to the main content area */
+    }
+  }
+  

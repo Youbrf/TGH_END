@@ -33,7 +33,7 @@ const routes: Routes = [
       { path: 'reservations', component: ReservationListComponent },
       { path: 'reservations/create', component: ReservationCreateComponent },
       { path: 'profil', component: ProfilComponent},
-      { path: 'profil/:id/history', component: HistoryReservationUserComponent},
+      { path: 'profil/:id/history', component: ReservationListComponent},
       { path: 'profil/:id/edit', component: UserEditComponent },
     ]
   }
