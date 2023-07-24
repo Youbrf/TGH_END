@@ -59,7 +59,8 @@ export class AuthentificationService {
   clearTokenAndRole(): void {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('role');
-    localStorage.removeItem('username')
+    localStorage.removeItem('username');
+    window.location.href = '/home';
   }
 
 }
