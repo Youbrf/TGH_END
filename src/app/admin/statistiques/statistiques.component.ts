@@ -6,7 +6,8 @@ import { StatistiquesService } from 'src/app/core/_service/statistiques.service'
   templateUrl: './statistiques.component.html',
   styleUrls: ['./statistiques.component.css']
 })
-export class StatistiquesComponent implements OnInit{
+export class StatistiquesComponent implements OnInit {
+  chartData: any[] = [];
   totalReservations!: number;
   averageReservationDuration!: number;
   reservationsByDay!: Map<string, number>;
@@ -16,30 +17,33 @@ export class StatistiquesComponent implements OnInit{
   mostDemandedServices!: Map<string, number>;
   mostRequestedEmployees!: Map<string, number>;
   bookingOccupancyRate!: number;
-  /*
-  reservationConversionRate!: number;
-  customerCommentsAndReviews!: Commentaire[];
-  */
   totalRevenueFromBookings!: number;
-  
+
   constructor(private statistiqueService: StatistiquesService) { }
 
   ngOnInit(): void {
+    this.getChartData();
     this.getTotalReservations();
     this.getAverageReservationDuration();
-    this.getReservationsByDay();
     this.getReservationsByWeek();
     this.getReservationsByMonth();
     this.getReservationStatus();
     this.getMostDemandedServices();
     this.getMostRequestedEmployees();
     this.getBookingOccupancyRate();
-    /*
-    this.getReservationConversionRate();
-    this.getCustomerCommentsAndReviews();
-    */
     this.getTotalRevenueFromBookings();
   }
+
+  getChartData(): void {
+    this.statistiqueService.getReservationsByDay()
+      .subscribe(reservations => {
+        this.reservationsByDay = new Map(Object.entries(reservations));
+        if (this.reservationsByDay && this.reservationsByDay.size > 0) {
+          this.chartData = Array.from(this.reservationsByDay.entries()).map(([name, value]) => ({ name, value }));
+        }
+      });
+  }
+  
 
   getTotalReservations(): void {
     this.statistiqueService.getTotalReservations()
@@ -49,11 +53,6 @@ export class StatistiquesComponent implements OnInit{
   getAverageReservationDuration(): void {
     this.statistiqueService.getAverageReservationDuration()
       .subscribe(average => this.averageReservationDuration = average);
-  }
-
-  getReservationsByDay(): void {
-    this.statistiqueService.getReservationsByDay()
-      .subscribe(reservations => this.reservationsByDay = reservations);
   }
 
   getReservationsByWeek(): void {
@@ -86,20 +85,8 @@ export class StatistiquesComponent implements OnInit{
       .subscribe(rate => this.bookingOccupancyRate = rate);
   }
 
-  /*
-  getReservationConversionRate(): void {
-    this.statistiqueService.getReservationConversionRate()
-      .subscribe(rate => this.reservationConversionRate = rate);
-  }
-
-  getCustomerCommentsAndReviews(): void {
-    this.statistiqueService.getCustomerCommentsAndReviews()
-      .subscribe(comments => this.customerCommentsAndReviews = comments);
-  }*/
-
   getTotalRevenueFromBookings(): void {
     this.statistiqueService.getTotalRevenueFromBookings()
       .subscribe(revenue => this.totalRevenueFromBookings = revenue);
   }
-
 }

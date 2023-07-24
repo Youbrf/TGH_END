@@ -5,9 +5,18 @@
   
     <h3>Réservations par jour</h3>
     <ul>
-      <li *ngFor="let entry of reservationsByDay | keyvalue">
-        {{ entry.key }} : {{ entry.value }}
-      </li>
+      <ngx-charts-bar-vertical
+        [view]="[700,400]"
+        [results]="chartData"
+        [xAxis]="true"
+        [yAxis]="true"
+        [gradient]="false"
+        [legend]="false"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="'Jour'"
+        [yAxisLabel]="'Réservations'">
+      </ngx-charts-bar-vertical>
     </ul>
   
     <h3>Réservations par semaine</h3>

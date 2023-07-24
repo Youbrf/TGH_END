@@ -21,6 +21,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { StatistiquesComponent } from './statistiques/statistiques.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { StatistiquesComponent } from './statistiques/statistiques.component';
     MatTableModule,
     MatSortModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgxChartsModule,
   ],
   exports:[
     DashboardComponent
