@@ -1,0 +1,73 @@
+<div>
+    <h2>Statistiques</h2>
+    <p>Nombre total de réservations : {{ totalReservations }}</p>
+    <p>Durée moyenne des réservations : {{ averageReservationDuration }} minutes</p>
+  
+    <h3>Réservations par jour</h3>
+      <input type="date" [(ngModel)]="startDate" (ngModelChange)="onDateRangeChange()">
+      <input type="date" [(ngModel)]="endDate" (ngModelChange)="onDateRangeChange()">
+      <ngx-charts-bar-vertical
+        [view]="[700,400]"
+        [results]="chartData"
+        [xAxis]="true"
+        [yAxis]="true"
+        [gradient]="false"
+        [legend]="false"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="'Jour'"
+        [yAxisLabel]="'Réservations'">
+      </ngx-charts-bar-vertical>
+  
+    <h3>Réservations par semaine</h3>
+    <ul>
+      <li *ngFor="let entry of reservationsByWeek | keyvalue">
+        Semaine {{ entry.key }} : {{ entry.value }}
+      </li>
+    </ul>
+  
+    <h3>Réservations par mois</h3>
+    <ul>
+      <li *ngFor="let entry of reservationsByMonth | keyvalue">
+        Mois {{ entry.key }} : {{ entry.value }}
+      </li>
+    </ul>
+  
+    <h3>Statut des réservations</h3>
+    <ul>
+      <li *ngFor="let entry of reservationStatus | keyvalue">
+        {{ entry.key }} : {{ entry.value }}
+      </li>
+    </ul>
+  
+    <h3>Services les plus demandés</h3>
+    <ul>
+      <li *ngFor="let entry of mostDemandedServices | keyvalue">
+        {{ entry.key }} : {{ entry.value }}
+      </li>
+    </ul>
+  
+    <h3>Employés les plus demandés</h3>
+    <ul>
+      <li *ngFor="let entry of mostRequestedEmployees | keyvalue">
+        {{ entry.key }} : {{ entry.value }}
+      </li>
+    </ul>
+  
+    <h3>Taux d'occupation des réservations</h3>
+    <p>{{ bookingOccupancyRate }}</p>
+  <!--  
+    <h3>Taux de conversion des réservations</h3>
+    <p>{{ reservationConversionRate }}</p>
+  
+    <h3>Commentaires et avis des clients</h3>
+    <ul>
+      <li *ngFor="let commentaire of customerCommentsAndReviews">
+        {{ commentaire.texte }}
+      </li>
+    </ul>
+  -->
+    <h3>Revenu total des réservations</h3>
+    <p>{{ totalRevenueFromBookings }}</p>
+  </div>
+  

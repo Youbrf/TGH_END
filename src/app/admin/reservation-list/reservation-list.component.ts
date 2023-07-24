@@ -51,7 +51,7 @@ export class ReservationListComponent {
   ) {}
 
   ngOnInit() {
-    this.idUser = +this.route.snapshot.params['id'];
+    this.isAdminUser();    
     if (!this.isAdmin) {
       const indexToRemove = this.displayedColumns.indexOf('user.firstname');
       if (indexToRemove !== -1) {
@@ -64,9 +64,11 @@ export class ReservationListComponent {
 
   isAdminUser(): boolean { 
     if (this.auth.getRole()==='ADMIN') {
-      this.isAdmin = true; 
+      return this.isAdmin = true; 
+    }else{
+      this.idUser = +this.route.snapshot.params['id'];
+      return this.isAdmin;
     }
-    return this.isAdmin;
   }
 
   loadReservations() {
