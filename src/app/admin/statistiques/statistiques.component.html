@@ -4,7 +4,8 @@
     <p>Durée moyenne des réservations : {{ averageReservationDuration }} minutes</p>
   
     <h3>Réservations par jour</h3>
-    <ul>
+      <input type="date" [(ngModel)]="startDate" (ngModelChange)="onDateRangeChange()">
+      <input type="date" [(ngModel)]="endDate" (ngModelChange)="onDateRangeChange()">
       <ngx-charts-bar-vertical
         [view]="[700,400]"
         [results]="chartData"
@@ -17,7 +18,6 @@
         [xAxisLabel]="'Jour'"
         [yAxisLabel]="'Réservations'">
       </ngx-charts-bar-vertical>
-    </ul>
   
     <h3>Réservations par semaine</h3>
     <ul>

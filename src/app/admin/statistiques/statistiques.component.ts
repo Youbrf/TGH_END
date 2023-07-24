@@ -18,11 +18,15 @@ export class StatistiquesComponent implements OnInit {
   mostRequestedEmployees!: Map<string, number>;
   bookingOccupancyRate!: number;
   totalRevenueFromBookings!: number;
+  startDate!: Date;
+  endDate!: Date;
+
 
   constructor(private statistiqueService: StatistiquesService) { }
 
   ngOnInit(): void {
     this.getChartData();
+    this.filterDataByDateRange();
     this.getTotalReservations();
     this.getAverageReservationDuration();
     this.getReservationsByWeek();
@@ -34,9 +38,28 @@ export class StatistiquesComponent implements OnInit {
     this.getTotalRevenueFromBookings();
   }
 
+  filterDataByDateRange(): void {
+    if (this.startDate && this.endDate) {
+      this.chartData = Array.from(this.reservationsByDay.entries())
+        .filter(([name, value]) => {
+          const date = new Date(name);
+          const startDate = new Date(this.startDate);
+          const endDate = new Date(this.endDate);
+          return date >= startDate && date <= endDate;
+        })
+        .map(([name, value]) => ({ name, value }));
+    }
+  }
+  
+  onDateRangeChange(): void {
+    this.filterDataByDateRange();
+  }
+  
   getChartData(): void {
     this.statistiqueService.getReservationsByDay()
       .subscribe(reservations => {
+        console.log(reservations);
+        
         this.reservationsByDay = new Map(Object.entries(reservations));
         if (this.reservationsByDay && this.reservationsByDay.size > 0) {
           this.chartData = Array.from(this.reservationsByDay.entries()).map(([name, value]) => ({ name, value }));
