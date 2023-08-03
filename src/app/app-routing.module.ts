@@ -5,6 +5,7 @@ import { ReservationComponent } from './body/component/reservation/reservation.c
 import { AuthentificationComponent } from './body/component/authentification/authentification.component';
 import { AdminModule } from './admin/admin.module';
 import { ServiceListComponent } from './body/component/service-list/service-list.component';
+import { LegalComponent } from './body/component/legal/legal.component';
 
 const routes: Routes = [
   { path: 'reservation', component:ReservationComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'authentification', component: AuthentificationComponent},
   { path: 'admin', loadChildren: () => AdminModule },
   { path: 'services', component: ServiceListComponent},
+  { path: 'legal', component: LegalComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

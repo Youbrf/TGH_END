@@ -12,6 +12,7 @@ import { HoursComponent } from './component/hours/hours.component';
 import { AuthentificationComponent } from './component/authentification/authentification.component';
 import { RegisterComponent } from './component/register/register.component';
 import { SigninComponent } from './component/signin/signin.component';
+import { LegalComponent } from './component/legal/legal.component';
 
 
 
@@ -23,7 +24,8 @@ import { SigninComponent } from './component/signin/signin.component';
     HoursComponent,
     AuthentificationComponent,
     RegisterComponent,
-    SigninComponent
+    SigninComponent,
+    LegalComponent
   ],
   imports: [
     AppRoutingModule,
