@@ -20,23 +20,23 @@ export class ReservationService {
   constructor(private HTTP: HttpClient, private router:Router,private auth : AuthentificationService) { }
 
   getAllReservation(){
-    return this.HTTP.get<Reservation[]>(API_URL+'RendezVous');
+    return this.HTTP.get<Reservation[]>(API_URL+'Reservation');
   }
 
   searchReservation(date: NgbDateStruct,idEmploye :number): Observable<Reservation[]> {
     const params = new HttpParams().set('date', `${date.year}-${sprintf('%02d', date.month)}-${sprintf('%02d', date.day)}`);
-    return this.HTTP.get<Reservation[]>(API_URL+"RendezVous/search/"+idEmploye, { params });
+    return this.HTTP.get<Reservation[]>(API_URL+"Reservation/search/"+idEmploye, { params });
   }
   
   
   getReservationByUser(idUser: number) {
     const params = new HttpParams().set('id',idUser);
-    return this.HTTP.get<Reservation[]>(API_URL+'RendezVous/user',{ params });
+    return this.HTTP.get<Reservation[]>(API_URL+'Reservation/user',{ params });
   } 
 
 
   createReservation(reservation: Reservation) {
-    this.HTTP.post<Reservation>(API_URL+"RendezVous",reservation, httpOptions).subscribe(
+    this.HTTP.post<Reservation>(API_URL+"Reservation",reservation, httpOptions).subscribe(
       () => {
         alert('La réservation a été enregistrée avec succès.');
         if (this.auth.getRole() === 'ADMIN') {
@@ -52,7 +52,7 @@ export class ReservationService {
   }
 
   deleteReservation(id : number){
-    this.HTTP.delete(API_URL+"RendezVous/"+id).subscribe(
+    this.HTTP.delete(API_URL+"Reservation/"+id).subscribe(
       () => {
         alert('Réservation supprimé avec succès');
         window.location.reload();
@@ -63,8 +63,8 @@ export class ReservationService {
     );
   }
 
-  updateRendezVous(id: number, reservation: Reservation) {
-    this.HTTP.put<Reservation>(API_URL+"RendezVous/"+id, reservation).subscribe(
+  updateReservation(id: number, reservation: Reservation) {
+    this.HTTP.put<Reservation>(API_URL+"Reservation/"+id, reservation).subscribe(
       () => {
         alert('Réservation mis à jour avec succès');
         window.location.reload();

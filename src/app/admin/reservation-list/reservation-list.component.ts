@@ -165,7 +165,7 @@ export class ReservationListComponent {
       this.dateSelectionnee.month - 1,
       this.dateSelectionnee.day + 1
     );
-    this.reservationService.updateRendezVous(this.reservationToUpdate.id, this.reservationToUpdate);
+    this.reservationService.updateReservation(this.reservationToUpdate.id, this.reservationToUpdate);
   }
 
   applyFilter(filterValue: string) {
