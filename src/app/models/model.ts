@@ -4,6 +4,12 @@ import { EmailValidator } from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
+
+export class StripeResponse {
+  success!: boolean;
+  sessionId!: string;
+}
+
 export class Reservation {  
   id!: number;
   dateReservation!: Date;

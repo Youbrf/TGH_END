@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { sprintf } from 'sprintf-js';
-import { Reservation, Service, User } from 'src/app/models/model';
+import { Reservation, Service, StripeResponse, User } from 'src/app/models/model';
 import { AuthentificationService } from '../authentification/authentification.service';
 
 const API_URL = 'http://localhost:8080/api/';
@@ -18,6 +18,10 @@ const httpOptions = {
 export class ReservationService {
 
   constructor(private HTTP: HttpClient, private router:Router,private auth : AuthentificationService) { }
+
+  createCheckoutSession(reservation: Reservation): Observable<StripeResponse>{
+    return this.HTTP.post<StripeResponse>(API_URL+'Reservation/create-checkout-session',reservation,httpOptions);
+  }
 
   getAllReservation(){
     return this.HTTP.get<Reservation[]>(API_URL+'Reservation');

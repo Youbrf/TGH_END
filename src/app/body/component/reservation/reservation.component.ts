@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { StripeService } from 'ngx-stripe';
+import { switchMap } from 'rxjs';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
 import { Reservation, Service, User } from 'src/app/models/model';
 
@@ -9,7 +11,6 @@ import { Reservation, Service, User } from 'src/app/models/model';
   styleUrls: ['./reservation.component.css']
 })
 export class ReservationComponent implements OnInit {
-
   services!: Service[];
   duree:number=0;
   reservation: Reservation = {
@@ -30,7 +31,10 @@ export class ReservationComponent implements OnInit {
     services: []
   };
 
-  constructor(private route: ActivatedRoute,private rv : ReservationService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private reservationService : ReservationService,
+    private stripeService : StripeService) { }
   
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -64,6 +68,25 @@ export class ReservationComponent implements OnInit {
 
   PayerSurPlace() {
     this.reservation.modePaiement = 'Sur place';
-    this.rv.createReservation(this.reservation);
+    this.reservationService.createReservation(this.reservation);
   }
+
+  PayerEnLigne() {
+    console.log(this.reservation);
+    
+    this.reservationService.createCheckoutSession(this.reservation)
+      .pipe(
+        switchMap(session =>{
+          console.log(session.sessionId);
+          return this.stripeService.redirectToCheckout({sessionId: session.sessionId})
+        })
+      )
+      .subscribe(result=>{
+        if (result.error) {
+          alert(result.error.message);
+          console.log("alert error");
+        }
+      })
+  }
+
 }
