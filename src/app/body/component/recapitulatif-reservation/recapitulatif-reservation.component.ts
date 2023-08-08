@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
 import { Reservation, User } from 'src/app/models/model';
+
 
 @Component({
   selector: 'app-recapitulatif-reservation',
@@ -28,6 +29,7 @@ export class RecapitulatifReservationComponent implements OnInit{
     services: []
   };
   idReservation! : number;
+  idReservationplace! : number;
 
   constructor(
     private route : ActivatedRoute,
@@ -35,10 +37,23 @@ export class RecapitulatifReservationComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    this.idReservation = JSON.parse(this.route.snapshot.queryParamMap.get('reservation') ?? '');
-    this.getReservationById(this.idReservation);
-        
+    const reservationParam = this.route.snapshot.queryParamMap.get('reservation');
+    const reservationPlaceParam = this.route.snapshot.queryParamMap.get('reservationplace');
+  
+    if (reservationParam !== null) {
+      this.idReservation = JSON.parse(reservationParam);
+      this.getReservationById(this.idReservation);
+    } 
+  
+    if (reservationPlaceParam !== null) {
+      this.idReservationplace = JSON.parse(reservationPlaceParam);
+      this.reservationService.getReservationById(this.idReservationplace).subscribe(reponse => {
+        reponse.heureDebut = this.formatHeure(reponse.heureDebut);
+        this.reservation = reponse;
+      });
+    } 
   }
+  
   
   getReservationById(id : number){
     this.reservationService.updateReservationById(id).subscribe(
@@ -59,6 +74,12 @@ export class RecapitulatifReservationComponent implements OnInit{
   formatHeure(heure: string): string {
     const partiesHeure = heure.split(":");    
     return partiesHeure[0] + ":" + partiesHeure[1];
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: any): void {
+    const customURL = '/home';
+    window.location.href = customURL;
   }
 
 }

@@ -40,12 +40,18 @@
                 <hr>
                 <div class="row">
                     <div class="col-8">Payé</div>
-                    <div class="col-4 text-right" style="font-size: larger;">{{ reservation.montantTotal }} €</div>
+                    <div class="col-4 text-right" style="font-size: larger;">
+                        <ng-container *ngIf="reservation.etatPaiement == 'PAID'; else autreValeur">{{ reservation.montantTotal }} €</ng-container>
+                        <ng-template #autreValeur>0 €</ng-template>
+                    </div>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-8">À payer au salon</div>
-                    <div class="col-4 text-right" style="font-size: larger;">{{ reservation.montantTotal }} €</div>
+                    <div class="col-4 text-right" style="font-size: larger;">
+                        <ng-container *ngIf="reservation.etatPaiement == 'UNPAID'; else autreValeur1">{{ reservation.montantTotal }} €</ng-container>
+                        <ng-template #autreValeur1>0 €</ng-template>
+                    </div>
                 </div>
             </div>
         </div>

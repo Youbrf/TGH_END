@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StripeService } from 'ngx-stripe';
 import { switchMap } from 'rxjs';
+import { AuthentificationService } from 'src/app/core/_service/authentification/authentification.service';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
 import { Reservation, Service, User } from 'src/app/models/model';
 
@@ -34,7 +35,9 @@ export class ReservationComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private reservationService : ReservationService,
-    private stripeService : StripeService) { }
+    private stripeService : StripeService,
+    private router:Router,
+    private auth : AuthentificationService) { }
   
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -68,16 +71,32 @@ export class ReservationComponent implements OnInit {
 
   PayerSurPlace() {
     this.reservation.modePaiement = 'SUR PLACE';
-    this.reservationService.createReservation(this.reservation);
+    this.reservation.etatPaiement = "UNPAID";
+    this.reservationService.createReservation(this.reservation).subscribe(
+      reponse => {
+        if (this.auth.getRole() === 'ADMIN') {
+          alert('La réservation a été enregistrée avec succès.');
+          this.router.navigate(['admin/reservations']);
+        } else {
+          this.router.navigate(['/success'], { queryParams: { reservationplace: JSON.stringify(reponse.id) } });
+        }
+      },
+      (error) => {
+        console.error('Erreur lors de l\'enregistrement de la réservation :', error);
+      }
+    );
   }
 
   PayerEnLigne() {
     console.log(this.reservation);
-    
-    this.reservationService.createCheckoutSession(this.reservation)
+    this.reservation.etatPaiement = "UNPAID";
+    this.reservation.statutReservation = "PENDING";
+    this.reservation.modePaiement = "SUR PLACE";
+    this.reservationService.createReservation(this.reservation).subscribe(
+      reponse =>{
+        this.reservationService.createCheckoutSession(reponse)
       .pipe(
         switchMap(session =>{
-          console.log(session.sessionId);
           return this.stripeService.redirectToCheckout({sessionId: session.sessionId})
         })
       )
@@ -87,6 +106,8 @@ export class ReservationComponent implements OnInit {
           console.log("alert error");
         }
       })
+      }
+    );
   }
 
 }

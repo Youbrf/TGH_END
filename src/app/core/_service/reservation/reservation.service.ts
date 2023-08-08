@@ -17,7 +17,7 @@ const httpOptions = {
 })
 export class ReservationService {
 
-  constructor(private HTTP: HttpClient, private router:Router,private auth : AuthentificationService) { }
+  constructor(private HTTP: HttpClient) { }
 
   createCheckoutSession(reservation: Reservation): Observable<StripeResponse>{
     return this.HTTP.post<StripeResponse>(API_URL+'Reservation/create-checkout-session',reservation,httpOptions);
@@ -43,20 +43,8 @@ export class ReservationService {
   }
 
 
-  createReservation(reservation: Reservation) {
-    this.HTTP.post<Reservation>(API_URL+"Reservation",reservation, httpOptions).subscribe(
-      () => {
-        alert('La réservation a été enregistrée avec succès.');
-        if (this.auth.getRole() === 'ADMIN') {
-          this.router.navigate(['admin/reservations']);
-        } else {
-          this.router.navigate(['/home']);
-        }
-      },
-      (error) => {
-        console.error('Erreur lors de l\'enregistrement de la réservation :', error);
-      }
-    );
+  createReservation(reservation: Reservation) : Observable<any> {
+    return this.HTTP.post<Reservation>(API_URL+"Reservation",reservation, httpOptions);
   }
 
   deleteReservation(id : number){
