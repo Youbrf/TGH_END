@@ -1,0 +1,53 @@
+<div class="container mt-5">
+    <div class="alert alert-success " style="font-size: larger;">
+      <p class="mb-0">Bonne nouvelle ! Votre rendez-vous est confirmé.</p>
+      <p class="mb-0">Les détails de votre réservation ont été envoyés à The Golden Hour.</p>
+    </div>
+    
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="row">
+            <div class="col-4">
+                <h5 class="card-title fw-bold pb-3 mt-2">Votre rendez-vous</h5>
+                <hr>
+                <div class="row mt-3">
+                    <div class="col-6 fs-1 text-center">{{ reservation.heureDebut }}</div>
+                    <div class="col-1"><div class="vertical-line"></div></div>
+                    <div class="col-5 fs-4">{{ reservation.dateReservation | date }}</div>
+                </div>
+                <hr>
+                <ul class="list-unstyled">
+                <li *ngFor="let service of reservation.services">
+                    {{ service.nom }} : {{ service.duree }} minute<br>
+                    {{ service.prix }} €
+                </li>
+                </ul>
+                <hr>
+                <div class="row">
+                    <div class="col-8">Esthéticien(ne)</div>
+                    <div class="col-4 text-right" style="font-size: larger;">{{ reservation.employer.firstname }}</div>
+                </div>
+            </div>
+            <div class="col-4">
+                <img src="../../../../assets/images/home/rett.jpg" alt="image" class="img-fluid mt-3" style="max-width: 100%;">
+            </div>
+            <div class="col-4">
+                <h5 class="fw-bold pb-3 mt-2">Détails de paiement</h5>
+                <div class="row mt-5">
+                    <div class="col-8">Total de la réservation</div>
+                    <div class="col-4 text-right" style="font-size: larger;">{{ reservation.montantTotal }} €</div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-8">Payé</div>
+                    <div class="col-4 text-right" style="font-size: larger;">{{ reservation.montantTotal }} €</div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-8">À payer au salon</div>
+                    <div class="col-4 text-right" style="font-size: larger;">{{ reservation.montantTotal }} €</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

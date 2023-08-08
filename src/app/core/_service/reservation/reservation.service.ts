@@ -36,7 +36,11 @@ export class ReservationService {
   getReservationByUser(idUser: number) {
     const params = new HttpParams().set('id',idUser);
     return this.HTTP.get<Reservation[]>(API_URL+'Reservation/user',{ params });
-  } 
+  }
+
+  getReservationById(id:number){
+    return this.HTTP.get<Reservation>(API_URL+'Reservation/'+id);
+  }
 
 
   createReservation(reservation: Reservation) {
@@ -67,16 +71,12 @@ export class ReservationService {
     );
   }
 
-  updateReservation(id: number, reservation: Reservation) {
-    this.HTTP.put<Reservation>(API_URL+"Reservation/"+id, reservation).subscribe(
-      () => {
-        alert('Réservation mis à jour avec succès');
-        window.location.reload();
-      },
-      error => {
-        console.error('Erreur lors de la mis à jour de la réservation', error);
-      }
-    );
+  updateReservation(id: number, reservation: Reservation) : Observable<any> {
+    return this.HTTP.put<Reservation>(API_URL + "Reservation/" + id, reservation);
+  }
+
+  updateReservationById(id: number) : Observable<any> {
+    return this.HTTP.put(API_URL + "Reservation/updated/" + id, null);
   }
   
 }

@@ -13,6 +13,7 @@ import { AuthentificationComponent } from './component/authentification/authenti
 import { RegisterComponent } from './component/register/register.component';
 import { SigninComponent } from './component/signin/signin.component';
 import { LegalComponent } from './component/legal/legal.component';
+import { RecapitulatifReservationComponent } from './component/recapitulatif-reservation/recapitulatif-reservation.component';
 
 
 
@@ -25,12 +26,13 @@ import { LegalComponent } from './component/legal/legal.component';
     AuthentificationComponent,
     RegisterComponent,
     SigninComponent,
-    LegalComponent
+    LegalComponent,
+    RecapitulatifReservationComponent
   ],
   imports: [
     AppRoutingModule,
     CommonModule,
-    BrowserModule, 
+    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

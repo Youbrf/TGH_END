@@ -1,0 +1,11 @@
+.container{
+    height: 65vh;
+}
+.img-fluid {
+    box-shadow: 5px 5px 5px rgba(159, 159, 159, 0.5);
+  }
+.vertical-line {
+    border-left: 1px solid #ccc;
+    height: 100%; /* Ajustez la hauteur selon vos besoins */
+    margin: 0 15px; /* Ajustez les marges selon vos besoins */
+  }
