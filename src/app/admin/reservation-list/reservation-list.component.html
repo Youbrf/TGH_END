@@ -107,7 +107,7 @@
         <th>Date d'annulation</th>
         <td>{{ reservationToDetails.dateAnnulation }}</td>
       </tr>
-      <tr>
+      <tr *ngIf="isAdminUser();">
         <th>Client</th>
         <td>{{ reservationToDetails.user.firstname }}</td>
       </tr>
@@ -156,11 +156,11 @@
             <label for="heureDebut">Heure de début</label>
             <input type="text" class="form-control" id="heureDebut" name="heureDebut" [(ngModel)]="reservationToUpdate.heureDebut">
           </div>
-          <div class="mb-3">
+          <div *ngIf="isAdminUser();" class="mb-3">
             <label for="heureFin">Heure de fin</label>
             <input type="text" class="form-control" id="heureFin" name="heureFin" [(ngModel)]="reservationToUpdate.heureFin">
           </div>
-          <div class="mb-3">
+          <div *ngIf="isAdminUser();" class="mb-3">
             <label for="remarquesSpeciales">Remarques spéciales</label>
             <textarea class="form-control" id="remarquesSpeciales" name="remarquesSpeciales" [disabled]="true" [(ngModel)]="reservationToUpdate.remarquesSpeciales"></textarea>
           </div>
@@ -170,47 +170,47 @@
               <option *ngFor="let status of reservationStatuses" [value]="status">{{ status }}</option>
             </select>
           </div>
-          <div class="mb-3">
+          <div *ngIf="isAdminUser();" class="mb-3">
             <label for="montantTotal">Montant total</label>
             <input type="number" class="form-control" id="montantTotal" name="montantTotal" [(ngModel)]="reservationToUpdate.montantTotal">
           </div>
-          <div class="mb-3">
+          <div *ngIf="isAdminUser();" class="mb-3">
             <label for="modePaiement">Mode de paiement</label>
             <input type="text" class="form-control" id="modePaiement" name="modePaiement" [(ngModel)]="reservationToUpdate.modePaiement">
           </div>
-          <div class="mb-3">
+          <div *ngIf="isAdminUser();" class="mb-3">
             <label for="etatPaiement">État de paiement</label>
             <select class="form-control" id="etatPaiement" name="etatPaiement" [(ngModel)]="reservationToUpdate.etatPaiement">
               <option *ngFor="let paymentState of paymentStates" [value]="paymentState">{{ paymentState }}</option>
             </select>
           </div>
-          <div class="mb-3">
+          <div *ngIf="isAdminUser();" class="mb-3">
             <label for="dateCreation">Date de création</label>
             <input type="text" class="form-control" id="dateCreation" name="dateCreation" [(ngModel)]="reservationToUpdate.dateCreation">
           </div>
-          <div class="mb-3">
+          <div *ngIf="isAdminUser();" class="mb-3">
             <label for="dateModification">Date de modification</label>
             <input type="text" class="form-control" id="dateModification" name="dateModification" [(ngModel)]="reservationToUpdate.dateModification">
           </div>
-          <div class="mb-3">
+          <div *ngIf="isAdminUser();" class="mb-3">
             <label for="dateAnnulation">Date d'annulation</label>
             <input type="text" class="form-control" id="dateAnnulation" name="dateAnnulation" [(ngModel)]="reservationToUpdate.dateAnnulation">
           </div>
-          <div class="mb-3">
+          <div *ngIf="isAdminUser();" class="mb-3">
             <label for="user">Utilisateur</label>
             <select class="form-control" id="user" name="user" [(ngModel)]="reservationToUpdate.user">
               <option [ngValue]="reservationToUpdate.user">{{ reservationToUpdate.user.firstname }}</option>
               <option *ngFor="let user of users" [ngValue]="user">{{ user.firstname }}</option>
             </select>
           </div>
-          <div class="mb-3">
+          <div *ngIf="isAdminUser();" class="mb-3">
             <label for="employer">Employeur</label>
             <select class="form-control" id="employer" name="employer" [(ngModel)]="reservationToUpdate.employer">
               <option [ngValue]="reservationToUpdate.employer">{{ reservationToUpdate.employer.firstname }}</option>
               <option *ngFor="let employer of employers" [ngValue]="employer">{{ employer.firstname }}</option>
             </select>
           </div>          
-          <div class="mb-3">
+          <div *ngIf="isAdminUser();" class="mb-3">
             <label for="services">Services</label>
             <ul>
               <li *ngFor="let service of reservationToUpdate.services">{{ service.nom }}</li>

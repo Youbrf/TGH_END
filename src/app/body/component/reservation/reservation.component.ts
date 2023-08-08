@@ -67,7 +67,7 @@ export class ReservationComponent implements OnInit {
   }
 
   PayerSurPlace() {
-    this.reservation.modePaiement = 'Sur place';
+    this.reservation.modePaiement = 'SUR PLACE';
     this.reservationService.createReservation(this.reservation);
   }
 
