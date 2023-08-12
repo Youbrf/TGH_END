@@ -43,10 +43,13 @@ export class SigninComponent {
         
       },
       (error)=>{
-        alert('Erreur lors de la connection');
+        if (error.status === 400 && error.error.errorMessage === 'Veuillez confirmer votre email avant de vous connecter.') {
+          alert('Veuillez confirmer votre email avant de vous connecter.');
+        } else {
+          console.error('Erreur lors de la connexion :', error);
+        }
       }
     );
-
     this.loginForm.reset();
     this.submitted = false;
   }

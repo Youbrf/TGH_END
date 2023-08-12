@@ -7,6 +7,7 @@ import { AdminModule } from './admin/admin.module';
 import { ServiceListComponent } from './body/component/service-list/service-list.component';
 import { LegalComponent } from './body/component/legal/legal.component';
 import { RecapitulatifReservationComponent } from './body/component/recapitulatif-reservation/recapitulatif-reservation.component';
+import { ConfirmEmailComponent } from './body/component/confirm-email/confirm-email.component';
 
 const routes: Routes = [
   { path: 'reservation', component:ReservationComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'services', component: ServiceListComponent},
   { path: 'legal', component: LegalComponent},
   { path: 'success', component: RecapitulatifReservationComponent},
+  { path: 'confirm', component: ConfirmEmailComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

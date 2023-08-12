@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
@@ -20,7 +20,7 @@ export class AuthentificationService {
   register(register:Register){
     this.HTTP.post<Register>(API_URL+"register",register,httpOptions).subscribe(
       () => {
-        alert('L\'inscription a été enregistrée avec succès.');
+        alert('L\'inscription a été enregistrée avec succès. Un e-mail de confirmation a été envoyé à votre adresse e-mail. Veuillez vérifier votre boîte de réception et suivre les instructions pour confirmer votre adresse e-mail.');
         if (this.getRole()==='ADMIN') {
           this.router.navigate(['admin/dashboard']);
         } else {
@@ -31,6 +31,11 @@ export class AuthentificationService {
         console.error('Erreur lors de l\'inscription :', error);
       }
     );
+  }
+
+  confirmEmail(token : string){
+    const params = new HttpParams().set('token', token);
+    return this.HTTP.get(API_URL+'confirm',{params});
   }
 
   authenticate(signin: Signin): Observable<any>{

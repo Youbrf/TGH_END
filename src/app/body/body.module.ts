@@ -14,6 +14,7 @@ import { RegisterComponent } from './component/register/register.component';
 import { SigninComponent } from './component/signin/signin.component';
 import { LegalComponent } from './component/legal/legal.component';
 import { RecapitulatifReservationComponent } from './component/recapitulatif-reservation/recapitulatif-reservation.component';
+import { ConfirmEmailComponent } from './component/confirm-email/confirm-email.component';
 
 
 
@@ -27,7 +28,8 @@ import { RecapitulatifReservationComponent } from './component/recapitulatif-res
     RegisterComponent,
     SigninComponent,
     LegalComponent,
-    RecapitulatifReservationComponent
+    RecapitulatifReservationComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     AppRoutingModule,
