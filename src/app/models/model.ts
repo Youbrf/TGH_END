@@ -10,6 +10,12 @@ export class StripeResponse {
   sessionId!: string;
 }
 
+export class AuthentificationReponse{
+  accessToken!:string;
+  refreshToken!:string;
+  errorMessage!:string;  
+}
+
 export class Reservation {  
   id!: number;
   dateReservation!: Date;

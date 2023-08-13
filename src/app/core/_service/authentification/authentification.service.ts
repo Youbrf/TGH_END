@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { Observable } from 'rxjs';
-import { Register, Signin } from 'src/app/models/model';
+import { AuthentificationReponse, Register, Signin } from 'src/app/models/model';
 
 const API_URL = 'http://localhost:8080/api/auth/';
 const httpOptions = {
@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthentificationService {
-
+ 
   constructor(private HTTP: HttpClient, private router:Router) { }
 
   register(register:Register){
@@ -40,6 +40,10 @@ export class AuthentificationService {
 
   authenticate(signin: Signin): Observable<any>{
     return this.HTTP.post<Signin>(API_URL+'authenticate',signin,httpOptions);
+  }
+
+  sendResetPasswordRequest(email : string) {
+    return this.HTTP.post<AuthentificationReponse>(API_URL+'reset-password',email,httpOptions);
   }
 
   saveTokenAndRole(token: string): void {
