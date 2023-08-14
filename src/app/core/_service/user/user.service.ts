@@ -1,11 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/model';
 
 const API_URL = 'http://localhost:8080/api/Users';
-const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
   
 @Injectable({
   providedIn: 'root'
@@ -16,6 +13,11 @@ export class UserService {
 
   getAllUsers(){
     return this.HTTP.get<User[]>(API_URL);
+  }
+
+  getUserByToken(token : string){
+    const params = new HttpParams().set('token', token);
+    return this.HTTP.get<User>(API_URL+'/token',{params});
   }
 
   getUserById(userId: number) {

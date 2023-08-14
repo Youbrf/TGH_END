@@ -43,7 +43,7 @@ export class AuthentificationService {
   }
 
   sendResetPasswordRequest(email : string) {
-    return this.HTTP.post<AuthentificationReponse>(API_URL+'reset-password',email,httpOptions);
+    return this.HTTP.post<AuthentificationReponse>(API_URL+'send-email-reset-password',email,httpOptions);
   }
 
   saveTokenAndRole(token: string): void {

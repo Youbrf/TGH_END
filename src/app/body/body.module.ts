@@ -15,6 +15,7 @@ import { SigninComponent } from './component/signin/signin.component';
 import { LegalComponent } from './component/legal/legal.component';
 import { RecapitulatifReservationComponent } from './component/recapitulatif-reservation/recapitulatif-reservation.component';
 import { ConfirmEmailComponent } from './component/confirm-email/confirm-email.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 
 
 
@@ -29,7 +30,8 @@ import { ConfirmEmailComponent } from './component/confirm-email/confirm-email.c
     SigninComponent,
     LegalComponent,
     RecapitulatifReservationComponent,
-    ConfirmEmailComponent
+    ConfirmEmailComponent,
+    ResetPasswordComponent
   ],
   imports: [
     AppRoutingModule,
