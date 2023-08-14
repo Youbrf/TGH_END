@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <h2 class="text-center mb-3">Liste des employers</h2>
-    <table class="table">
+    <table class="table table-no-border-top">
       <thead>
         <tr>
           <th>Nom</th>
@@ -15,10 +15,10 @@
           <td>{{ employer.email }}</td>
           <td>{{ employer.role }}</td>
           <td>
-            <button class="btn btn-primary" [routerLink]="[employer.id]">Détails</button>
+            <button class="btn btn-secondary" [routerLink]="[employer.id]">Détails</button>
             <button class="btn btn-success" [routerLink]="[employer.id,'edit']" style="margin-left: 5px;">Modifier</button>
             <button class="btn btn-danger" (click)="deleteEmployer(employer.id)" style="margin-left: 5px;">Supprimer</button>
-            <button class="btn btn-info" [routerLink]="[employer.id,'history']" style="margin-left: 5px;">Historique des réservations</button>
+            <button class="btn btn-primary" [routerLink]="[employer.id,'history']" style="margin-left: 5px;">Historique des réservations</button>
           </td>
         </tr>
       </tbody>
