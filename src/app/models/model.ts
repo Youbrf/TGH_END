@@ -32,7 +32,7 @@ export class Reservation {
   user!: User; 
   employer!: User; 
   services!: Service[];
-  review!: Review;
+  review!: Review | null;
 }
 
 export class Review{

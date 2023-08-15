@@ -5,7 +5,6 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { sprintf } from 'sprintf-js';
 import { Reservation, Service, StripeResponse, User } from 'src/app/models/model';
-import { AuthentificationService } from '../authentification/authentification.service';
 
 const API_URL = 'http://localhost:8080/api/';
 const httpOptions = {

@@ -30,7 +30,7 @@ export class ReservationComponent implements OnInit {
     user: new User(),
     employer: new User(),
     services: [],
-    review: new Review
+    review: new Review()
   };
 
   constructor(
@@ -73,6 +73,9 @@ export class ReservationComponent implements OnInit {
   PayerSurPlace() {
     this.reservation.modePaiement = 'SUR PLACE';
     this.reservation.etatPaiement = "UNPAID";
+    this.reservation.review = null;
+    console.log(this.reservation);
+    
     this.reservationService.createReservation(this.reservation).subscribe(
       reponse => {
         if (this.auth.getRole() === 'ADMIN') {
@@ -93,6 +96,7 @@ export class ReservationComponent implements OnInit {
     this.reservation.etatPaiement = "UNPAID";
     this.reservation.statutReservation = "PENDING";
     this.reservation.modePaiement = "SUR PLACE";
+    this.reservation.review = null;
     this.reservationService.createReservation(this.reservation).subscribe(
       reponse =>{
         this.reservationService.createCheckoutSession(reponse)

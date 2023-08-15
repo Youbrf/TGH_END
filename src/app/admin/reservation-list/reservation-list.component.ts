@@ -72,28 +72,31 @@ export class ReservationListComponent {
   }
 
   loadReservations() {
+    let reservationObservable;
+  
     if (this.idUser != null) {
-      this.reservationService.getReservationByUser(this.idUser).subscribe(reservations => {
-        this.reservations = new MatTableDataSource(reservations);
-        this.reservations.sort = this.sort;
-        this.reservations.paginator = this.paginator;
-        this.reservations.filterPredicate = (data: Reservation, filter: string) => {
-          const dataStr = JSON.stringify(data).toLowerCase();
-          return dataStr.indexOf(filter) != -1;
-        };
-      });
+      reservationObservable = this.reservationService.getReservationByUser(this.idUser);
     } else {
-      this.reservationService.getAllReservation().subscribe(reservations => {
-      this.reservations = new MatTableDataSource(reservations);
-      this.reservations.sort = this.sort;
-      this.reservations.paginator = this.paginator;
-      this.reservations.filterPredicate = (data: Reservation, filter: string) => {
-        const dataStr = JSON.stringify(data).toLowerCase();
-        return dataStr.indexOf(filter) != -1;
-      };
-    });
+      reservationObservable = this.reservationService.getAllReservation();
     }
+  
+    reservationObservable.subscribe(reservations => {
+      this.reservations = new MatTableDataSource(reservations);
+      this.setupTableFeatures();
+    });
   }
+  
+  private setupTableFeatures() {
+    this.reservations.sort = this.sort;
+    this.reservations.paginator = this.paginator;
+    this.reservations.filterPredicate = this.filterPredicate;
+  }
+  
+  private filterPredicate(data: Reservation, filter: string): boolean {
+    const dataStr = JSON.stringify(data).toLowerCase();
+    return dataStr.indexOf(filter) !== -1;
+  }
+  
 
   loadUserAndEmployer() {
     this.userService.getAllUsers().subscribe(users => {
