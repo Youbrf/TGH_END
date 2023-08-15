@@ -48,18 +48,18 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let reservation">
-        <button *ngIf="isAdminUser();" class="btn btn-sm btn-danger" (click)="deleteReservation(reservation.id)">Supprimer</button>
-        <button class="btn btn-sm btn-primary ml-1" (click)="open(content, reservation)">Modifier</button>
-        <button class="btn btn-sm btn-success ml-1" (click)="openD(contentD,reservation)">Détails</button>
+        <button class="btn btn-sm btn-secondary ml-1" (click)="openD(contentD,reservation)">Détails</button>
+        <button class="btn btn-sm btn-success ml-1" (click)="open(content, reservation)">Modifier</button>
+        <button *ngIf="isAdminUser();" class="btn btn-sm btn-danger ml-1" (click)="deleteReservation(reservation.id)">Supprimer</button>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let reservation; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
   <div class="text-right">
-    <button class="btn btn-success btn-sm" [routerLink]="['create']">Ajouter une réservation</button>
+    <button *ngIf="isAdminUser();" class="btn btn-success btn-sm" [routerLink]="['create']">Ajouter une réservation</button>
     <button *ngIf="!isAdminUser();" class="btn btn-secondary btn-sm ml-2" routerLink="../..">Retour</button>
   </div>
 </div>
