@@ -32,6 +32,13 @@ export class Reservation {
   user!: User; 
   employer!: User; 
   services!: Service[];
+  review!: Review;
+}
+
+export class Review{
+  id!: number;
+  rating!: number;
+  comment!: string;
 }
 
 export class Service {
@@ -67,4 +74,5 @@ export class User {
   password!: string;
   gsm!:string;
   role!: string;
+  confirmationToken!:string;
 }

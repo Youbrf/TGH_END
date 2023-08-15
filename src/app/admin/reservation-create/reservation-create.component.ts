@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategorieServiceService } from 'src/app/core/_service/categorie-service/categorie-service.service';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
 import { UserService } from 'src/app/core/_service/user/user.service';
-import { CategorieService, Reservation, Service, User } from 'src/app/models/model';
+import { CategorieService, Reservation, Review, Service, User } from 'src/app/models/model';
 
 @Component({
   selector: 'app-reservation-create',
@@ -25,7 +25,8 @@ export class ReservationCreateComponent implements OnInit {
     etatPaiement: '',
     user: new User(),
     employer: new User(),
-    services:[new Service]
+    services:[new Service],
+    review: new Review
   };
   employers: User[] = [];
   users: User[] = [];

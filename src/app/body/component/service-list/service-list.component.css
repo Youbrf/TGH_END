@@ -94,8 +94,8 @@ section {
     border-radius: 4px;
   }
   
-  /* Gestion du débordement pour le tbody */
+
   .table-container {
-    max-height: 400px; /* Ajustez la hauteur maximale selon vos besoins */
+    max-height: 400px;
     overflow-y: auto;
   }

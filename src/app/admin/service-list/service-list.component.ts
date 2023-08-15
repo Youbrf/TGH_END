@@ -9,6 +9,8 @@ import { CategorieService, Service } from 'src/app/models/model';
   styleUrls: ['./service-list.component.css']
 })
 export class ServiceListComponent implements OnInit{
+  isCollapsedCategories = false;
+  isCollapsedServices = true;
   categories!: CategorieService[];
   services!: Service[];
   categorieToUpdate: CategorieService = new CategorieService();
@@ -60,4 +62,10 @@ export class ServiceListComponent implements OnInit{
     this.serviceS.deleteService(idService);
   }
 
+  clickCatg(){
+    this.isCollapsedServices=true;
+  }
+  clickServ(){
+    this;this.isCollapsedCategories=true;
+  }
 }

@@ -4,7 +4,7 @@ import { StripeService } from 'ngx-stripe';
 import { switchMap } from 'rxjs';
 import { AuthentificationService } from 'src/app/core/_service/authentification/authentification.service';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
-import { Reservation, Service, User } from 'src/app/models/model';
+import { Reservation, Review, Service, User } from 'src/app/models/model';
 
 @Component({
   selector: 'app-reservation',
@@ -29,7 +29,8 @@ export class ReservationComponent implements OnInit {
     etatPaiement: '',
     user: new User(),
     employer: new User(),
-    services: []
+    services: [],
+    review: new Review
   };
 
   constructor(

@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
-import { Reservation, User } from 'src/app/models/model';
+import { Reservation, Review, User } from 'src/app/models/model';
 
 
 @Component({
@@ -26,7 +26,8 @@ export class RecapitulatifReservationComponent implements OnInit{
     etatPaiement: '',
     user: new User,
     employer: new User,
-    services: []
+    services: [],
+    review: new Review
   };
   idReservation! : number;
   idReservationplace! : number;
