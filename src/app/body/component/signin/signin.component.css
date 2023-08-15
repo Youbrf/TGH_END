@@ -25,3 +25,8 @@
     color: red;
     margin-top: 5px;
   }
+  .btn-primary {
+    background-color: #ffa500; 
+    border-color: #ffa500; 
+    color: #fff; 
+  }

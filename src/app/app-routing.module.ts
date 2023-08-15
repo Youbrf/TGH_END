@@ -5,6 +5,10 @@ import { ReservationComponent } from './body/component/reservation/reservation.c
 import { AuthentificationComponent } from './body/component/authentification/authentification.component';
 import { AdminModule } from './admin/admin.module';
 import { ServiceListComponent } from './body/component/service-list/service-list.component';
+import { LegalComponent } from './body/component/legal/legal.component';
+import { RecapitulatifReservationComponent } from './body/component/recapitulatif-reservation/recapitulatif-reservation.component';
+import { ConfirmEmailComponent } from './body/component/confirm-email/confirm-email.component';
+import { ResetPasswordComponent } from './body/component/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: 'reservation', component:ReservationComponent },
@@ -12,6 +16,10 @@ const routes: Routes = [
   { path: 'authentification', component: AuthentificationComponent},
   { path: 'admin', loadChildren: () => AdminModule },
   { path: 'services', component: ServiceListComponent},
+  { path: 'legal', component: LegalComponent},
+  { path: 'success', component: RecapitulatifReservationComponent},
+  { path: 'confirm', component: ConfirmEmailComponent},
+  { path: 'reset', component: ResetPasswordComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

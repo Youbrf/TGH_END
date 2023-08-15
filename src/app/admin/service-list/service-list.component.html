@@ -1,26 +1,47 @@
-<div class="container">
-    <h2>Liste des catégories</h2>
-    <table class="table table-striped">
+<div class="row mt-5 justify-content-md-center">
+  <button
+      type="button"
+      class="btn btn-primary col-4 mr-1"
+      (click)="clickCatg();collapse.toggle()"
+      [attr.aria-expanded]="!isCollapsedCategories"
+      aria-controls="collapseCategories"
+    >Liste des catégories
+  </button>
+  <button
+      type="button"
+      class="btn btn-primary col-4 ml-1"
+      (click)="clickServ();collapseS.toggle()"
+      [attr.aria-expanded]="!isCollapsedServices"
+      aria-controls="collapseServices"
+    >Liste des services
+  </button>
+</div>
+
+<div class="container" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsedCategories">
+    <h2 class="text-center mt-4">Liste des catégories</h2>
+    <table class="table table-striped table-no-border-top">
       <thead>
         <tr>
           <th>Nom</th>
+          <th>Description</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let categorie of categories">
           <td>{{ categorie.nom }}</td>
+          <td>{{ categorie.description }}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Actions">
-              <button class="btn btn-primary btn-sm" (click)="open(content, categorie)">Modifier</button>
-              <button class="btn btn-danger btn-sm" (click)="deleteCategorie(categorie.id)">Supprimer</button>
+              <button class="btn btn-success btn-sm" (click)="open(content, categorie)">Modifier</button>
+              <button class="btn btn-danger btn-sm ml-1" (click)="deleteCategorie(categorie.id)">Supprimer</button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="text-right">
-      <button class="btn btn-success btn-sm" (click)="openNewCategorie(contentC)">Ajouter une catégorie</button>
+      <button class="btn btn-primary btn-sm" (click)="openNewCategorie(contentC)">Ajouter une catégorie</button>
     </div>
   </div>
 
@@ -104,9 +125,12 @@
   </ng-template>
   
   
-  <div class="container">
-    <h2>Liste des services</h2>
-    <table class="table table-striped">
+  <div class="container" #collapseS="ngbCollapse" [(ngbCollapse)]="isCollapsedServices" style="max-height: 700px;overflow-y: auto;">
+    <h2 class="text-center mt-4" >Liste des services</h2>
+    <div class="text-right">
+      <button class="btn btn-primary btn-sm" [routerLink]="['create']">Ajouter un service</button>
+    </div>
+    <table class="table table-striped table-no-border-top">
       <thead>
         <tr>
           <th>Nom</th>
@@ -126,15 +150,15 @@
           <td>{{ service.categorie.nom }}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Actions">
-              <button class="btn btn-primary btn-sm" (click)="openService(contents,service)">Modifier</button>
-              <button class="btn btn-danger btn-sm" (click)="deleteService(service.id)">Supprimer</button>
+              <button class="btn btn-success btn-sm" (click)="openService(contents,service)">Modifier</button>
+              <button class="btn btn-danger btn-sm ml-1" (click)="deleteService(service.id)">Supprimer</button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="text-right">
-      <button class="btn btn-success btn-sm" [routerLink]="['create']">Ajouter un service</button>
+      <button class="btn btn-primary btn-sm" [routerLink]="['create']">Ajouter un service</button>
     </div>
   </div>
   

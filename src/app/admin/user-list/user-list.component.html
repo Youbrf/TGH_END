@@ -28,10 +28,10 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let user">
-        <button class="btn btn-primary" [routerLink]="[user?.id]">Détails</button>
+        <button class="btn btn-secondary" [routerLink]="[user?.id]">Détails</button>
         <button class="btn btn-success" [routerLink]="[user?.id,'edit']" style="margin-left: 5px;">Modifier</button>
         <button class="btn btn-danger" (click)="deleteUser(user?.id)" style="margin-left: 5px;">Supprimer</button>
-        <button class="btn btn-info"  [routerLink]="[user?.id,'history']" style="margin-left: 5px;">Historique des réservations</button>
+        <button class="btn btn-primary"  [routerLink]="[user?.id,'history']" style="margin-left: 5px;">Historique des réservations</button>
       </td>
     </ng-container>
 

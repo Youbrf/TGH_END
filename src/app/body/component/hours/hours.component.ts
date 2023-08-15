@@ -4,7 +4,7 @@ import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap'
 import { AuthentificationService } from 'src/app/core/_service/authentification/authentification.service';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
 import { UserService } from 'src/app/core/_service/user/user.service';
-import { Reservation, Service, User } from 'src/app/models/model';
+import { Reservation, Review, Service, User } from 'src/app/models/model';
 
 @Component({
   selector: 'app-hours',
@@ -36,7 +36,8 @@ export class HoursComponent implements OnInit {
     etatPaiement: '',
     user: new User(),
     employer: new User(),
-    services: []
+    services: [],
+    review: new Review
   };
   serviceDurationA!: number;
   currentDate!:NgbDateStruct;

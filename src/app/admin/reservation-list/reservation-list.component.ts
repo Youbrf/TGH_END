@@ -165,7 +165,15 @@ export class ReservationListComponent {
       this.dateSelectionnee.month - 1,
       this.dateSelectionnee.day + 1
     );
-    this.reservationService.updateRendezVous(this.reservationToUpdate.id, this.reservationToUpdate);
+    this.reservationService.updateReservation(this.reservationToUpdate.id, this.reservationToUpdate).subscribe(
+      () => {
+        alert('Réservation mis à jour avec succès');
+        window.location.reload();
+      },
+      error => {
+        console.error('Erreur lors de la mis à jour de la réservation', error);
+      }
+    );
   }
 
   applyFilter(filterValue: string) {

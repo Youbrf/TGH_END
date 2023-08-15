@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthentificationService } from 'src/app/core/_service/authentification/authentification.service';
 import { Signin } from 'src/app/models/model';
@@ -11,13 +11,19 @@ import { Signin } from 'src/app/models/model';
 })
 export class SigninComponent {
   loginForm!: FormGroup;
-  submitted = false;
+  resetPasswordForm = new FormGroup({
+    resetEmail: new FormControl ('',[Validators.required,Validators.email])
+  });
   signin: Signin={
     email:'',
     password:''
   };
 
-  constructor(private formBuilder: FormBuilder,private router: Router, private auth: AuthentificationService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router, 
+    private auth: AuthentificationService,
+    ) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -27,14 +33,12 @@ export class SigninComponent {
   }
 
   submitLoginForm() {
-    this.submitted = true;
     this.signin.email=this.loginForm.get('email')?.value;
     this.signin.password=this.loginForm.get('password')?.value;
 
     this.auth.authenticate(this.signin).subscribe(
       (reponse)=>{
         this.auth.saveTokenAndRole(reponse.access_token)
-        alert('Bienvenue');
         if (this.auth.getRole() === 'ADMIN') {
           this.router.navigate(['/admin/dashboard']);
         } else {
@@ -43,11 +47,29 @@ export class SigninComponent {
         
       },
       (error)=>{
-        alert('Erreur lors de la connection');
+        if (error.status === 400 && error.error.errorMessage === 'Veuillez confirmer votre email avant de vous connecter.') {
+          alert('Veuillez confirmer votre email avant de vous connecter.');
+        } else {
+          console.error('Erreur lors de la connexion :', error);
+        }
       }
     );
-
     this.loginForm.reset();
-    this.submitted = false;
+  }
+
+  submitResetPasswordForm(){
+    const resetEmail = this.resetPasswordForm.controls.resetEmail.value;
+    if (resetEmail!=null) {
+      this.auth.sendResetPasswordRequest(resetEmail).subscribe(
+        (reponse)=>{
+          alert(reponse.errorMessage);          
+        },
+        (error)=>{
+          console.error('Erreur lors de la connexion :', error);
+        }
+      );
+    }
+    
+    this.resetPasswordForm.reset();
   }
 }

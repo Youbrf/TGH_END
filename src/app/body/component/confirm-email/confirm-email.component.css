@@ -1,3 +1,6 @@
+.container{
+    height: 65vh;
+}
 .btn-primary {
     background-color: #ffa500; /* Couleur du bouton */
     border-color: #ffa500; /* Couleur de la bordure du bouton */

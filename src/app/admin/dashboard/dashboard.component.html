@@ -2,7 +2,8 @@
   <div class="row">
     <nav class="col-md-2 d-none d-md-block bg-light sidebar vh-100 overflow-y-auto">
       <div class="sidebar-sticky">
-        <ul class="nav flex-column">
+        <img class="mt-2 mb-4" src="../../../assets/images/home/logotgh.png" alt="logo" style="max-width: 250px; max-height: 250px;">
+        <ul class="nav flex-column" style="height: 80vh;">
           <li class="nav-item">
             <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive="active">
               <i class="fas fa-tachometer-alt"></i> Tableau de bord
@@ -33,6 +34,8 @@
               <i  class="fa fa-line-chart"></i> Statistiques
             </a>
           </li>
+        </ul>
+        <ul class="nav flex-column mt-auto">
           <li class="nav-item">
             <a class="nav-link clickable" (click)="logout()">
               <i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion
