@@ -7,17 +7,18 @@ import { StatistiquesService } from 'src/app/core/_service/statistiques.service'
   styleUrls: ['./statistiques.component.css']
 })
 export class StatistiquesComponent implements OnInit {
+  cardColor: string = '#FF5733';
   chartData: any[] = [];
-  totalReservations!: number;
+  totalReservations!: any[];
   averageReservationDuration!: number;
-  reservationsByDay!: Map<string, number>;
-  reservationsByWeek!: Map<number, number>;
-  reservationsByMonth!: Map<number, number>;
-  reservationStatus!: Map<string, number>;
+  reservationsByDay: Map<string, number> = new Map<string,number>();
+  reservationsByWeek!: any[];
+  reservationsByMonth!: any[];
+  reservationStatus!: any[];
   mostDemandedServices!: Map<string, number>;
   mostRequestedEmployees!: Map<string, number>;
   bookingOccupancyRate!: number;
-  totalRevenueFromBookings!: number;
+  totalRevenueFromBookings!: any[];
   startDate!: Date;
   endDate!: Date;
 
@@ -25,10 +26,10 @@ export class StatistiquesComponent implements OnInit {
   constructor(private statistiqueService: StatistiquesService) { }
 
   ngOnInit(): void {
+    this.setDefaultDateRange();
     this.getChartData();
     this.filterDataByDateRange();
     this.getTotalReservations();
-    this.getAverageReservationDuration();
     this.getReservationsByWeek();
     this.getReservationsByMonth();
     this.getReservationStatus();
@@ -36,6 +37,13 @@ export class StatistiquesComponent implements OnInit {
     this.getMostRequestedEmployees();
     this.getBookingOccupancyRate();
     this.getTotalRevenueFromBookings();
+    
+  }
+
+  setDefaultDateRange(): void {
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.endDate.setDate(this.endDate.getDate() + 30);
   }
 
   filterDataByDateRange(): void {
@@ -46,6 +54,11 @@ export class StatistiquesComponent implements OnInit {
           const startDate = new Date(this.startDate);
           const endDate = new Date(this.endDate);
           return date >= startDate && date <= endDate;
+        })
+        .sort(([nameA, valueA], [nameB, valueB]) => {
+          const dateA = new Date(nameA);
+          const dateB = new Date(nameB);
+          return dateA.getTime() - dateB.getTime();
         })
         .map(([name, value]) => ({ name, value }));
     }
@@ -58,11 +71,9 @@ export class StatistiquesComponent implements OnInit {
   getChartData(): void {
     this.statistiqueService.getReservationsByDay()
       .subscribe(reservations => {
-        console.log(reservations);
-        
         this.reservationsByDay = new Map(Object.entries(reservations));
         if (this.reservationsByDay && this.reservationsByDay.size > 0) {
-          this.chartData = Array.from(this.reservationsByDay.entries()).map(([name, value]) => ({ name, value }));
+          this.filterDataByDateRange();
         }
       });
   }
@@ -70,27 +81,41 @@ export class StatistiquesComponent implements OnInit {
 
   getTotalReservations(): void {
     this.statistiqueService.getTotalReservations()
-      .subscribe(total => this.totalReservations = total);
+      .subscribe(total => {
+        this.totalReservations = [{
+          name: "Réservations",
+          value: total
+        }];
+      });
   }
-
-  getAverageReservationDuration(): void {
-    this.statistiqueService.getAverageReservationDuration()
-      .subscribe(average => this.averageReservationDuration = average);
-  }
+  
 
   getReservationsByWeek(): void {
     this.statistiqueService.getReservationsByWeek()
-      .subscribe(reservations => this.reservationsByWeek = reservations);
+      .subscribe(reservations => {
+        this.reservationsByWeek = Object.entries(reservations).map(([key, value]) => ({
+          name: key,
+          value: value
+        }));
+      });
   }
+  
 
   getReservationsByMonth(): void {
     this.statistiqueService.getReservationsByMonth()
-      .subscribe(reservations => this.reservationsByMonth = reservations);
+      .subscribe(reservations => {
+        this.reservationsByMonth = Object.entries(reservations).map(([key, value]) => ({
+          name: key,
+          value: value
+        }));});
   }
 
   getReservationStatus(): void {
     this.statistiqueService.getReservationStatus()
-      .subscribe(status => this.reservationStatus = status);
+      .subscribe(status => {this.reservationStatus = Object.entries(status).map(([key, value]) => ({
+        name: key,
+        value: value
+      }));});
   }
 
   getMostDemandedServices(): void {
@@ -110,6 +135,11 @@ export class StatistiquesComponent implements OnInit {
 
   getTotalRevenueFromBookings(): void {
     this.statistiqueService.getTotalRevenueFromBookings()
-      .subscribe(revenue => this.totalRevenueFromBookings = revenue);
+      .subscribe(revenue => {
+        this.totalRevenueFromBookings = [{
+          name: "Revenus",
+          value: revenue
+        }];
+      });
   }
 }
