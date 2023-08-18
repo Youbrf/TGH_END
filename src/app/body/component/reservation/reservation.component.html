@@ -20,11 +20,9 @@
         </div>
       </div>
       
-      
-      
-      <div class="col-12" *ngIf="reservation.services">
+      <div class="col-12 mt-3" *ngIf="reservation.services">
         <table class="table table-striped reservation-table">
-          <thead>
+          <thead class="fs-4">
             <tr>
               <th>Date de réservation</th>
               <th>Service</th>
@@ -33,7 +31,7 @@
               <th>Commentaire</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="fs-5">
             <tr>
               <td>{{ reservation.dateReservation | date:'short' }}</td>
               <td>
@@ -49,8 +47,10 @@
             </tr>
           </tbody>
         </table>
-        <button class="btn btn-primary" (click)="PayerSurPlace()">Payer sur place</button>
-        <button class="btn btn-primary" (click)="PayerEnLigne()">Payer en ligne</button>
+        <div class="text-right">
+          <button class="btn btn-primary" (click)="PayerSurPlace()">Payer sur place</button>
+          <button class="btn btn-primary ml-1" (click)="PayerEnLigne()">Payer en ligne</button>
+        </div>
       </div>
     </div>
   </div>

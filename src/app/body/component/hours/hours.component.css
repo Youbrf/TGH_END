@@ -1,10 +1,6 @@
 .container {
     padding-left: 10px;
 }
-.text-primary {
-    font-size: 18px;
-    font-weight: bold;
-}
 .list-group {
     margin-top: 20px;
 }
@@ -12,9 +8,16 @@
     cursor: pointer;
 }
 .btn-primary {
+    background-color: #ffa500; 
+    border-color: #ffa500;
+    color: #fff; 
     margin-top: 20px;
 }
 .list-container {
     height: 250px;
     overflow: auto;
 }
+.ngb-dp-day.selected {
+    background-color: #ffa500;
+    color: #fff; 
+  }
