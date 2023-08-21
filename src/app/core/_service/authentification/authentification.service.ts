@@ -5,7 +5,7 @@ import jwtDecode from 'jwt-decode';
 import { Observable } from 'rxjs';
 import { AuthentificationReponse, Register, Signin } from 'src/app/models/model';
 
-const API_URL = 'http://localhost:8080/api/auth/';
+const API_URL = 'http://tgh-api-env.eba-p2iwtqga.eu-west-3.elasticbeanstalk.com/api/auth/';
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

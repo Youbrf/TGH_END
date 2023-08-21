@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-  const API_URL = 'HTTP://localhost:8080/api/statistiques';
+  const API_URL = 'http://tgh-api-env.eba-p2iwtqga.eu-west-3.elasticbeanstalk.com/api/statistiques';
 @Injectable({
   providedIn: 'root'
 })
