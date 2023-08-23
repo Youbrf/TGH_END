@@ -1,33 +1,40 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <h2>Détails de l'utilisateur</h2>
-        <hr>
-  
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Prénom</th>
-              <th scope="col">Nom</th>
-              <th scope="col">GSM</th>
-              <th scope="col">Email</th>
-              <th scope="col">Rôle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngIf="user">
-              <td>{{ user.id }}</td>
-              <td>{{ user.firstname }}</td>
-              <td>{{ user.lastname }}</td>
-              <td>{{ user.gsm }}</td>
-              <td>{{ user.email }}</td>
-              <td>{{ user.role }}</td>
-            </tr>
-          </tbody>
-        </table>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="user-card card">
+        <div class="card-header">
+          Détails de l'utilisateur
+        </div>
+        <div class="card-body">
+          <div class="detail-row">
+            <div class="detail-label">ID:</div>
+            <div class="detail-value">{{ user.id }}</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Prénom:</div>
+            <div class="detail-value">{{ user.firstname }}</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Nom:</div>
+            <div class="detail-value">{{ user.lastname }}</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">GSM:</div>
+            <div class="detail-value">{{ user.gsm }}</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Email:</div>
+            <div class="detail-value">{{ user.email }}</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Rôle:</div>
+            <div class="detail-value">{{ user.role }}</div>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <button class="btn btn-secondary" routerLink="..">Retour</button>
+        </div>
       </div>
-      <button class="btn btn-secondary" routerLink="..">Retour</button>
     </div>
   </div>
-  
+</div>

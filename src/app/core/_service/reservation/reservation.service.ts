@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { sprintf } from 'sprintf-js';
 import { Reservation, Service, StripeResponse, User } from 'src/app/models/model';
 
-const API_URL = 'http://tgh-api-env.eba-p2iwtqga.eu-west-3.elasticbeanstalk.com/api/';
+const API_URL = 'http://localhost:8080/api/';
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

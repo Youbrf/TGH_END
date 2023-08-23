@@ -1,3 +1,21 @@
 .container {
     height: 60vh;
   }
+.card-header{
+  background-color: #ffa500;
+    color: #fff; 
+}
+.btn-success {
+  background-color: #ff8000;
+  border-color: #FF8000;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background-color: #b85c00;
+  border-color: #b85c00;
+  color: #fff;
+}
+.label{
+  font-weight: bold;
+}

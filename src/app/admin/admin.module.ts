@@ -14,7 +14,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployerListComponent } from './employer-list/employer-list.component';
 import { MainComponent } from './main/main.component';
 import { NgbCollapseModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-import { HistoryReservationUserComponent } from './history-reservation-user/history-reservation-user.component';
 import { ProfilComponent } from './profil/profil.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
@@ -37,7 +36,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     DashboardComponent,
     EmployerListComponent,
     MainComponent,
-    HistoryReservationUserComponent,
     ProfilComponent,
     StatistiquesComponent
   ],

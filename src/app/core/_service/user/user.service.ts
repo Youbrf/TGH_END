@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/model';
 
-const API_URL = 'http://tgh-api-env.eba-p2iwtqga.eu-west-3.elasticbeanstalk.com/api/Users';
+const API_URL = 'http://localhost:8080/api/Users';
   
 @Injectable({
   providedIn: 'root'

@@ -39,6 +39,8 @@ export class UserEditComponent {
       this.userService.getUserById(this.userId).subscribe(
         (user: User) => {
           this.user = user;
+          console.log(this.user);
+          
         },
         (error) => {
           console.log('Une erreur s\'est produite lors de la récupération des détails de l\'utilisateur :', error);
@@ -48,12 +50,14 @@ export class UserEditComponent {
   }
 
   updateUser() {
+    
+    console.log(this.user);
     if (this.user) {
       this.userService.updateUser(this.user).subscribe(
         (updatedUser: User) => {
           console.log('Utilisateur mis à jour avec succès :', updatedUser);
           alert('Utilisateur mis à jour avec succès');
-          if (this.user.role === "USER") {
+          if (this.auth.getRole() === "USER") {
             this.router.navigate(['/admin/profil']);
           }else{
             this.router.navigate(['/admin/users', this.user.id]);
@@ -65,6 +69,20 @@ export class UserEditComponent {
       );
     }
   }
+
+
+  sendEmailResetPassword(){
+    if (this.user.email!=null) {
+      this.auth.sendResetPasswordRequest(this.user.email).subscribe(
+        (reponse)=>{
+          alert(reponse.errorMessage);          
+        },
+        (error)=>{
+          console.error('Erreur lors de l\'envoie du mail :', error);
+        }
+      );
+    }
+  }  
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;

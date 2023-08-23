@@ -9,7 +9,7 @@ import { User } from 'src/app/models/model';
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent {
-  user: User | undefined;
+  user!: User;
 
   constructor(
     private route: ActivatedRoute,

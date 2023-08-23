@@ -65,7 +65,7 @@ export class SigninComponent {
           alert(reponse.errorMessage);          
         },
         (error)=>{
-          console.error('Erreur lors de la connexion :', error);
+          console.error('Erreur lors de l\'envoie du mail :', error);
         }
       );
     }

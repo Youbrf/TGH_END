@@ -60,7 +60,7 @@
   <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
   <div class="text-right">
     <button *ngIf="isAdminUser();" class="btn btn-success btn-sm" [routerLink]="['create']">Ajouter une réservation</button>
-    <button *ngIf="!isAdminUser();" class="btn btn-secondary btn-sm ml-2" routerLink="../..">Retour</button>
+    <button *ngIf="isAdminUser() && idUser" class="btn btn-secondary btn-sm ml-2" routerLink="../..">Retour</button>
   </div>
 </div>
 
