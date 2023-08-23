@@ -3,19 +3,16 @@
     border-color: #ffa500;
     color: #fff;
 }
-
-.btn-success {
-    background-color: #ff8000;
-    border-color: #FF8000;
-    color: #fff;
-}
-
 .btn-primary:hover {
     background-color: #b97800;
     border-color: #b97800;
     color: #fff;
 }
-
+.btn-success {
+    background-color: #ff8000;
+    border-color: #FF8000;
+    color: #fff;
+}
 .btn-success:hover {
     background-color: #b85c00;
     border-color: #b85c00;

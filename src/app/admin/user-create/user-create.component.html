@@ -1,15 +1,15 @@
-<div class="container">
+<div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
           <form [formGroup]="registrationForm" (ngSubmit)="register()" class="needs-validation" novalidate>
-            <h2 class="text-center mb-4">Ajout User</h2>
+            <h2 class="text-center mb-4">Ajout Utilisateur</h2>
 
             <div class="form-group">
               <label for="firstname">Prénom</label>
               <input type="text" id="firstname" class="form-control" formControlName="firstname" required>
-              <div *ngIf="registrationForm.get('firstname')?.invalid && (registrationForm.get('firstname')?.dirty || registrationForm.get('firstname')?.touched)" class="invalid-feedback">
+              <div *ngIf="registrationForm.controls['firstname'].invalid && registrationForm.controls['firstname'].touched" class="alert alert-danger mt-1">
                 Prénom est requis.
               </div>
             </div>
@@ -17,7 +17,7 @@
             <div class="form-group">
               <label for="lastname">Nom</label>
               <input type="text" id="lastname" class="form-control" formControlName="lastname" required>
-              <div *ngIf="registrationForm.get('lastname')?.invalid && (registrationForm.get('lastname')?.dirty || registrationForm.get('lastname')?.touched)" class="invalid-feedback">
+              <div *ngIf="registrationForm.controls['lastname'].invalid && registrationForm.controls['lastname'].touched" class="alert alert-danger mt-1">
                 Nom est requis.
               </div>
             </div>
@@ -25,25 +25,41 @@
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" id="email" class="form-control" formControlName="email" required>
-              <div *ngIf="registrationForm.get('email')?.invalid && (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)" class="invalid-feedback">
+              <div *ngIf="registrationForm.controls['email'].errors && registrationForm.controls['email'].touched" class="alert alert-danger mt-1">
                 Email est requis.
               </div>
             </div>
 
             <div class="form-group">
               <label for="password">Mot de passe</label>
-              <input type="password" id="password" class="form-control" formControlName="password" required>
-              <div *ngIf="registrationForm.get('password')?.invalid && (registrationForm.get('password')?.dirty || registrationForm.get('password')?.touched)" class="invalid-feedback">
-                Mot de passe est requis.
-              </div>
+              <div class="input-group">
+                <input type="{{showPassword ? 'text' : 'password'}}" id="password" class="form-control" formControlName="password" placeholder="Entrez un nouveau mot de passe" />
+                <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+                    {{showPassword ? 'Cacher' : 'Afficher'}}
+                </button>
+                </div>
+            </div>
+              <div *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched" class="alert alert-danger mt-1">
+                <div *ngIf="registrationForm.controls['password'].errors?.['required']">Le mot de passe est requis.</div>
+                <div *ngIf="registrationForm.controls['password'].errors?.['minlength']">Le mot de passe doit comporter au moins 6 caractères.</div>
+            </div>
             </div>
 
             <div class="form-group">
               <label for="confirmPassword">Confirmer le mot de passe</label>
-              <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword" required>
-              <div *ngIf="registrationForm.hasError('passwordMismatch') && (registrationForm.get('confirmPassword')?.dirty || registrationForm.get('confirmPassword')?.touched)" class="invalid-feedback">
-                Les mots de passe ne correspondent pas.
-              </div>
+              <div class="input-group">
+                <input type="{{showPassword ? 'text' : 'password'}}" id="confirmPassword" class="form-control" formControlName="confirmPassword" placeholder="Confirmez le nouveau mot de passe" />
+                <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+                    {{showPassword ? 'Cacher' : 'Afficher'}}
+                </button>
+                </div>
+            </div>
+              <div *ngIf="registrationForm.controls['confirmPassword'].invalid && registrationForm.controls['confirmPassword'].touched" class="alert alert-danger mt-1">
+                <div *ngIf="registrationForm.controls['confirmPassword'].errors?.['required']">La confirmation du mot de passe est requise.</div>
+                <div *ngIf="registrationForm.controls['confirmPassword'].errors?.['passwordMismatch']">Les mots de passe ne correspondent pas.</div>
+            </div>
             </div>
 
             <div class="form-group">

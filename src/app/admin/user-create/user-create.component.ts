@@ -17,6 +17,7 @@ export class UserCreateComponent {
     role:'',
   };
   registrationForm!: FormGroup;
+  showPassword: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private auth : AuthentificationService){};
 
@@ -25,7 +26,7 @@ export class UserCreateComponent {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
       role: ['', Validators.required]
     }, {
@@ -38,9 +39,9 @@ export class UserCreateComponent {
     const confirmPassword = formGroup.get('confirmPassword')?.value;
 
     if (password === confirmPassword) {
-      return null; 
+      formGroup.controls['confirmPassword'].setErrors(null);
     } else {
-      return { passwordMismatch: true };
+      formGroup.controls['confirmPassword'].setErrors({ passwordMismatch: true });
     }
   }
 
@@ -55,6 +56,9 @@ export class UserCreateComponent {
     this.information.role = this.registrationForm.get('role')?.value;
     this.auth.register(this.information);
     
+  }
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
 }
