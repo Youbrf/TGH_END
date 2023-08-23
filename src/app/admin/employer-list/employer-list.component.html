@@ -4,16 +4,18 @@
       <thead>
         <tr>
           <th>Nom</th>
+          <th>Prénom</th>
           <th>Email</th>
-          <th>Role</th>
+          <th>Gsm</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let employer of employers">
+          <td>{{ employer.lastname }}</td>
           <td>{{ employer.firstname }}</td>
           <td>{{ employer.email }}</td>
-          <td>{{ employer.role }}</td>
+          <td>{{ employer.gsm }}</td>
           <td>
             <button class="btn btn-secondary" [routerLink]="[employer.id]">Détails</button>
             <button class="btn btn-success" [routerLink]="[employer.id,'edit']" style="margin-left: 5px;">Modifier</button>
