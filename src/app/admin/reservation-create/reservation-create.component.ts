@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategorieServiceService } from 'src/app/core/_service/categorie-service/categorie-service.service';
 import { ReservationService } from 'src/app/core/_service/reservation/reservation.service';
 import { UserService } from 'src/app/core/_service/user/user.service';
@@ -37,7 +38,7 @@ export class ReservationCreateComponent implements OnInit {
   selectedServiceId!: number;
   selectedCategorie: CategorieService = new CategorieService;
 
-  constructor(private reservationService: ReservationService, private userService: UserService, private serviceService: CategorieServiceService) {}
+  constructor(private reservationService: ReservationService,private router:Router, private userService: UserService, private serviceService: CategorieServiceService) {}
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe(users =>{
       for (const user of users) {
@@ -75,6 +76,7 @@ export class ReservationCreateComponent implements OnInit {
     
     this.reservation.services = []
     this.serviceService.getServiceById(this.selectedServiceId).subscribe(service=>{
+      this.reservation.montantTotal = service.prix;
       this.reservation.services.push(service);
     });
 
@@ -84,8 +86,15 @@ export class ReservationCreateComponent implements OnInit {
     this.userService.getUserById(this.reservation.employer.id).subscribe(user=>{
       this.reservation.employer = user;
     })
-    
     console.log(this.reservation);
-    this.reservationService.createReservation(this.reservation);
+    this.reservationService.createReservation(this.reservation).subscribe(
+      () => {
+        alert('Réservation ajouter avec succès');
+        this.router.navigate(['/admin/reservations']);
+      },
+      error => {
+        console.error('Erreur lors de la suppression de la réservation', error);
+      }
+    );;
   }
 }
